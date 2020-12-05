@@ -11,6 +11,7 @@ class PlayerData {
         this.road = 25; //int
         this.village = 5; //int
         this.city = 5; //int
+        this.victorypoints = 0; //int
     }
 
     add(key, value) {

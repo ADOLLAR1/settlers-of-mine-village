@@ -8,12 +8,15 @@ const roads = [];
 const villages = [];
 const cities = [];
 
+let gui;
+
 function preload() {
     loadImages();
 }
 
 function setup() {
     createCanvas(870,870);
+    gui = new GUI(undefined);
     for (let i=0;i<16;i+=2) {
         for (let j=0;j<18;j+=2) {
             tiles.push(new Tile("DevGrass", i, j, Math.floor(Math.random()*12+1)));
@@ -29,21 +32,33 @@ function draw() {
     fill(0,0,0);
     stroke(0,0,0,0);
     tiles.forEach(t => {
-        t.draw()
+        if (t != undefined) {
+            t.draw()
+        } 
     });
     roads.forEach(r => {
-        r.draw()
+        if (r != undefined) {
+            r.draw()
+        } 
     });
     villages.forEach(v => {
-        v.draw()
+        if (v != undefined) {
+            if (v.city == undefined) {
+                v.draw()
+            } else {
+                cities.push(v.city);
+                v = undefined;
+            }
+        } 
     });
     cities.forEach(c => {
-        c.draw()
+        if (c != undefined) {
+            c.draw()
+        } 
     });
 }
 
 function mousePressed() {
-    fullscreen(true);
 }
 
 function loadImages() {
