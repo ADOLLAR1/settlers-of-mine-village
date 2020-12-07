@@ -19,6 +19,9 @@ class GUI {
         this.fishLabel = createElement("p", "0");
         this.clayLabel = createElement("p", "0");
         this.glassLabel = createElement("p", "0");
+        this.roadLabel = createElement("p", "0");
+        this.villageLabel = createElement("p", "0");
+        this.cityLabel = createElement("p", "0");
 
         this.cowUp.parent("cowUp");
         this.woodUp.parent("woodUp");
@@ -38,5 +41,8 @@ class GUI {
         this.fishLabel.parent("fishLabel");
         this.clayLabel.parent("clayLabel");
         this.glassLabel.parent("glassLabel");
+        this.roadLabel.parent("roadLabel");
+        this.villageLabel.parent("villageLabel");
+        this.cityLabel.parent("cityLabel");
     }
 }

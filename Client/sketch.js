@@ -62,5 +62,5 @@ function mousePressed() {
 }
 
 function loadImages() {
-    ASSETS.IMAGES.DevGrass = loadImage("Assets/DevGrass.png");
+    ASSETS.IMAGES.DevGrass = loadImage("Assets/devGrass.png");
 }
