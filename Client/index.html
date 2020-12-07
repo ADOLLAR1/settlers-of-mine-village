@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settlers of Mine Village</title>
+  <script src="https://kit.fontawesome.com/f872c3f2f5.js" crossorigin="anonymous"></script>
   <script src="p5/p5.js"></script>
   <!--<script src="p5/addons/p5.sound.js"></script>-->
   <script src="sketch.js"></script>
@@ -15,6 +16,34 @@
   <script src="village.js"></script>
   <script src="city.js"></script>
   <script src="gui.js"></script>
+  <style>
+    td, th {
+      text-align: center;
+      width:32px;
+      height:32px;
+      padding:0;
+      font-size:32px;
+      margin:0;
+      border: 1px solid black;
+      border-collapse:collapse;
+    }
+    td button {
+      margin:auto;
+      width:28px;
+      height:28px;
+      padding:0;
+      font-size:16px;
+    }
+    td p {
+      padding:0;
+      margin:0;
+    }
+    td, th i {
+      width:32px;
+      height:32px;
+      font-size:16px;
+    }
+  </style>
 </head>
 
 <body style="margin: 0;">
@@ -23,14 +52,30 @@
   <table>
     <tbody>
       <tr>
-        <th>Cow</th>
-        <th>Wood</th>
-        <th>Ore</th>
-        <th>Fish</th>
-        <th>Clay</th>
-        <th>Glass</th>
+        <th>C</th>
+        <th>W</th>
+        <th>O</th>
+        <th><i class="fas fa-fish" tooltip="Fish"></i></th>
+        <th>C</th>
+        <th>G</th>
+        <th> </th>
+        <th>R</th>
+        <th><i class="far fa-building" tooltip="Village"></i></th>
+        <th><i class="fas fa-city" tooltip="City"></i></th>
       </tr>
       <tr>
+        <td id="cowLabel"></td>
+        <td id="woodlabel"></td>
+        <td id="oreLabel"></td>
+        <td id="fishLabel"></td>
+        <td id="clayLabel"></td>
+        <td id="glassLabel"></td>
+        <th></th>
+        <td id="roadLabel"></td>
+        <td id="villageLabel"></td>
+        <td id="cityLabel"></td>
+      </tr>
+      <tr style="display:none;">
         <td id="cowUp"></td>
         <td id="woodUp"></td>
         <td id="oreUp"></td>
@@ -38,7 +83,7 @@
         <td id="clayUp"></td>
         <td id="glassUp"></td>
       </tr>
-      <tr>
+      <tr style="display:none;">
         <td id="cowDown"></td>
         <td id="woodDown"></td>
         <td id="oreDown"></td>
