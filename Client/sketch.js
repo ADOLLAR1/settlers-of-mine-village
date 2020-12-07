@@ -9,6 +9,7 @@ const villages = [];
 const cities = [];
 
 let gui;
+let playerdata;
 
 function preload() {
     loadImages();
@@ -16,7 +17,8 @@ function preload() {
 
 function setup() {
     createCanvas(870,870);
-    gui = new GUI(undefined);
+    playerdata = new PlayerData("", [0,0,0]);
+    gui = new GUI(playerdata);
     for (let i=0;i<16;i+=2) {
         for (let j=0;j<18;j+=2) {
             tiles.push(new Tile("DevGrass", i, j, Math.floor(Math.random()*12+1)));
@@ -28,6 +30,7 @@ function setup() {
 }
 
 function draw() {
+    gui.update();
     background(127,127,255);
     fill(0,0,0);
     stroke(0,0,0,0);

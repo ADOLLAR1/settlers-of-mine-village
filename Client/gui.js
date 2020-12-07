@@ -1,42 +1,27 @@
 class GUI {
     constructor(_playerdata) {
         this.playerdata = _playerdata; //PlayerData
-        this.cowUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.woodUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.oreUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.fishUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.clayUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.glassUp = createElement("button", "<i class='fas fa-chevron-up'></i>");
-        this.cowDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.woodDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.oreDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.fishDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.clayDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.glassDown = createElement("button", "<i class='fas fa-chevron-down'></i>");
-        this.cowLabel = createElement("p", "0");
-        this.woodLabel = createElement("p", "0");
-        this.oreLabel = createElement("p", "0");
-        this.fishLabel = createElement("p", "0");
-        this.clayLabel = createElement("p", "0");
-        this.glassLabel = createElement("p", "0");
-        this.roadLabel = createElement("p", "0");
-        this.villageLabel = createElement("p", "0");
-        this.cityLabel = createElement("p", "0");
+        this.vpLabel = createElement("span", this.playerdata.victorypoints);
+        this.cowLabel = createElement("span", this.playerdata.cow);
+        this.woodLabel = createElement("span", this.playerdata.wood);
+        this.oreLabel = createElement("span", this.playerdata.ore);
+        this.fishLabel = createElement("span", this.playerdata.fish);
+        this.clayLabel = createElement("span", this.playerdata.clay);
+        this.glassLabel = createElement("span", this.playerdata.glass);
+        this.roadLabel = createElement("span", this.playerdata.purchasedRoad);
+        this.villageLabel = createElement("span", this.playerdata.purchasedVillage);
+        this.cityLabel = createElement("span", this.playerdata.purchasedCity);
+        this.roadPurchaseButton = createElement("button", "Purchase");
+        this.villagePurchaseButton = createElement("button", "Purchase");
+        this.cityPurchaseButton = createElement("button", "Purchase");
+        this.roadPlaceButton = createElement("button", "Place");
+        this.villagePlaceButton = createElement("button", "Place");
+        this.cityPlaceButton = createElement("button", "Place");
+        this.cardPurchaseButton = createElement("button", "Purchase");
 
-        this.cowUp.parent("cowUp");
-        this.woodUp.parent("woodUp");
-        this.oreUp.parent("oreUp");
-        this.fishUp.parent("fishUp");
-        this.clayUp.parent("clayUp");
-        this.glassUp.parent("glassUp");
-        this.cowDown.parent("cowDown");
-        this.woodDown.parent("woodDown");
-        this.oreDown.parent("oreDown");
-        this.fishDown.parent("fishDown");
-        this.clayDown.parent("clayDown");
-        this.glassDown.parent("glassDown");
+        this.vpLabel.parent("vpLabel");
         this.cowLabel.parent("cowLabel");
-        this.woodLabel.parent("woodlabel");
+        this.woodLabel.parent("woodLabel");
         this.oreLabel.parent("oreLabel");
         this.fishLabel.parent("fishLabel");
         this.clayLabel.parent("clayLabel");
@@ -44,5 +29,61 @@ class GUI {
         this.roadLabel.parent("roadLabel");
         this.villageLabel.parent("villageLabel");
         this.cityLabel.parent("cityLabel");
+        this.roadPurchaseButton.parent("roadPurchase");
+        this.villagePurchaseButton.parent("villagePurchase");
+        this.cityPurchaseButton.parent("cityPurchase");
+        this.roadPlaceButton.parent("roadPlace");
+        this.villagePlaceButton.parent("villagePlace");
+        this.cityPlaceButton.parent("cityPlace");
+        this.cardPurchaseButton.parent("cardPurchase");
+
+        this.roadPurchaseButton.mouseClicked(() => {this.roadPurchaseClick()});
+        this.villagePurchaseButton.mouseClicked(() => {this.villagePurchaseClick()});
+        this.cityPurchaseButton.mouseClicked(() => {this.cityPurchaseClick()});
+        this.roadPlaceButton.mouseClicked(() => {this.roadPlaceClick()});
+        this.villagePlaceButton.mouseClicked(() => {this.villagePlaceClick()});
+        this.cityPlaceButton.mouseClicked(() => {this.cityPlaceClick()});
+        this.cardPurchaseButton.mouseClicked(() => {this.cardPurchaseClick()});
+    }
+
+    update() {
+        this.vpLabel.html(this.playerdata.victorypoints);
+        this.cowLabel.html(this.playerdata.cow);
+        this.woodLabel.html(this.playerdata.wood);
+        this.oreLabel.html(this.playerdata.ore);
+        this.fishLabel.html(this.playerdata.fish);
+        this.clayLabel.html(this.playerdata.clay);
+        this.glassLabel.html(this.playerdata.glass);
+        this.roadLabel.html(this.playerdata.purchasedRoad);
+        this.villageLabel.html(this.playerdata.purchasedVillage);
+        this.cityLabel.html(this.playerdata.purchasedCity);
+    }
+
+    roadPurchaseClick() {
+
+    }
+
+    villagePurchaseClick() {
+
+    }
+
+    cityPurchaseClick() {
+
+    }
+
+    roadPlaceClick() {
+
+    }
+
+    villagePlaceClick() {
+
+    }
+
+    cityPlaceClick() {
+
+    }
+
+    cardPurchaseClick() {
+
     }
 }

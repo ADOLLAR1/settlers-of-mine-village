@@ -2,7 +2,7 @@
 <html lang="">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
   <title>Settlers of Mine Village</title>
   <script src="https://kit.fontawesome.com/f872c3f2f5.js" crossorigin="anonymous"></script>
   <script src="p5/p5.js"></script>
@@ -40,60 +40,62 @@
       margin:0;
     }
     td, th i {
-      width:32px;
-      height:32px;
+      width:30px;
+      height:30px;
       font-size:16px;
+      line-height:32px;
+    }
+    main {
+      grid-area: main;
+      width: 100%;
+      height: 100%;
+    }
+    div.GUI {
+      grid-area: GUI;
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      display: grid;
+      grid-template-areas: 'main GUI';
+    }
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    li {
+      list-style-type: none;
     }
   </style>
 </head>
 
-<body style="margin: 0;">
+<body>
   <main>
   </main>
-  <table>
-    <tbody>
-      <tr>
-        <th>C</th>
-        <th>W</th>
-        <th>O</th>
-        <th><i class="fas fa-fish" tooltip="Fish"></i></th>
-        <th>C</th>
-        <th>G</th>
-        <th> </th>
-        <th>R</th>
-        <th><i class="far fa-building" tooltip="Village"></i></th>
-        <th><i class="fas fa-city" tooltip="City"></i></th>
-      </tr>
-      <tr>
-        <td id="cowLabel"></td>
-        <td id="woodlabel"></td>
-        <td id="oreLabel"></td>
-        <td id="fishLabel"></td>
-        <td id="clayLabel"></td>
-        <td id="glassLabel"></td>
-        <th></th>
-        <td id="roadLabel"></td>
-        <td id="villageLabel"></td>
-        <td id="cityLabel"></td>
-      </tr>
-      <tr style="display:none;">
-        <td id="cowUp"></td>
-        <td id="woodUp"></td>
-        <td id="oreUp"></td>
-        <td id="fishUp"></td>
-        <td id="clayUp"></td>
-        <td id="glassUp"></td>
-      </tr>
-      <tr style="display:none;">
-        <td id="cowDown"></td>
-        <td id="woodDown"></td>
-        <td id="oreDown"></td>
-        <td id="fishDown"></td>
-        <td id="clayDown"></td>
-        <td id="glassDown"></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="GUI">
+    <ul>
+      <li>VP:&nbsp;<span id="vpLabel"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-horse" tooltip="Cow">:&nbsp;</i><span id="cowLabel"></span></li>
+      <li><i class="fas fa-tree" tooltip="Wood">:&nbsp;</i><span id="woodLabel"></span></li>
+      <li><i class="far fa-gem" tooltip="Ore">:&nbsp;</i><span id="oreLabel"></span></li>
+      <li><i class="fas fa-fish" tooltip="Fish">:&nbsp;</i><span id="fishLabel"></span></li>
+      <li><i class="fas fa-circle" tooltip="Clay">:&nbsp;</i><span id="clayLabel"></span></li>
+      <li><i class="fab fa-windows" tooltip="Glass">:&nbsp;</i><span id="glassLabel"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-road" tooltip="Road">:&nbsp;</i><span id="roadLabel"></span><span id="roadPurchase"></span><span id="roadPlace"></span></li>
+      <li><i class="fas fa-building" tooltip="Village">:&nbsp;</i><span id="villageLabel"></span><span id="villagePurchase"></span><span id="villagePlace"></span></li>
+      <li><i class="fas fa-city" tooltip="City">:&nbsp;</i><span id="cityLabel"></span><span id="cityPurchase"></span><span id="cityPlace"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-sd-card" tooltip="Development Card">:&nbsp;</i><span id="cardPurchase"></span></li>
+      <li>&nbsp;</li>
+      <li>Road Pice: 1x&nbsp;Clay 1x&nbsp;Wood</li>
+      <li>Village Pice: 1x&nbsp;Cow 1x&nbsp;Wood 1x&nbsp;Fish 1x&nbsp;Glass</li>
+      <li>City Pice: 2x&nbsp;Ore 2x&nbsp;Clay</li>
+    </ul>
+  </div>
 </body>
-
 </html>
