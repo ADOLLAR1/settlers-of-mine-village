@@ -20,7 +20,7 @@ function setup() {
     playerdata = new PlayerData("", [0,0,0]);
     gui = new GUI(playerdata);
     for (let i=0;i<16;i+=2) {
-        for (let j=0;j<18;j+=2) {
+        for (let j=0;j<16;j+=2) {
             tiles.push(new Tile("DevGrass", i, j, Math.floor(Math.random()*12+1)));
             roads.push(new RoadSlot(i+1,j,false));
             roads.push(new RoadSlot(i,j+1,true));
@@ -44,16 +44,19 @@ function draw() {
             r.draw()
         } 
     });
-    villages.forEach(v => {
+
+    for (let i=0; i<villages.length; i++) {
+        let v = villages[i];
         if (v != undefined) {
             if (v.city == undefined) {
                 v.draw()
             } else {
                 cities.push(v.city);
-                v = undefined;
+                villages[i] = undefined;
             }
-        } 
-    });
+        }
+    }
+
     cities.forEach(c => {
         if (c != undefined) {
             c.draw()
