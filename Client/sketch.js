@@ -69,4 +69,5 @@ function mousePressed() {
 
 function loadImages() {
     ASSETS.IMAGES.DevGrass = loadImage("Assets/devGrass.png");
+    ASSETS.IMAGES.Ocean = loadImage("Assets/ocean.png");
 }
