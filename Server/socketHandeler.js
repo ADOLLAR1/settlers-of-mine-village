@@ -2,6 +2,7 @@ class SocketHandeler {
     constructor() {
         this.WebSocket = require('ws');
         this.port = 0; //int
+        this.game = require("./game.js");
         this.games = []; //[Game, Game, ...]
     }
 
@@ -32,10 +33,9 @@ class SocketHandeler {
     }
 
     createGame(_key) {
-        let game = require('./game.js');
-        game.create(_key);
-        this.games.push(game);
-        return game;
+        let data = this.game.create(_key);
+        this.games.push(data);
+        return data;
     }
 
 }
