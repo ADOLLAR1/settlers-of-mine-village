@@ -3,13 +3,14 @@ const ASSETS = {
     SOUNDS: {}
 }
 
-const tiles = [];
-const roads = [];
-const villages = [];
-const cities = [];
+let tiles = [];
+let roads = [];
+let villages = [];
+let cities = [];
 
 let gui;
 let playerdata;
+let socketHandeler;
 
 function preload() {
     loadImages();
@@ -19,6 +20,8 @@ function setup() {
     createCanvas(870,870);
     playerdata = new PlayerData("", [0,0,0]);
     gui = new GUI(playerdata);
+    socketHandeler = new SocketHandeler("ws://127.0.0.1:15000");
+    socketHandeler.create();
     for (let i=0;i<16;i+=2) {
         for (let j=0;j<16;j+=2) {
             tiles.push(new Tile("DevGrass", i, j, Math.floor(Math.random()*12+1)));

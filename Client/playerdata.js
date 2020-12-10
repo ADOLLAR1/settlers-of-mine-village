@@ -1,5 +1,6 @@
 class PlayerData {
     constructor(_name, _color) {
+        this.key = 0; //int
         this.name = _name; //String
         this.color = _color; //[int,int,int] 0-255
         this.cow = 0; //int
@@ -15,6 +16,7 @@ class PlayerData {
         this.purchasedVillage = 0; //int
         this.purchasedCity = 0; //int
         this.victorypoints = 0; //int
+        this.cards = []; //[int, int, ...]
     }
 
     add(key, value) {
