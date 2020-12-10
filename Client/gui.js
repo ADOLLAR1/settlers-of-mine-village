@@ -1,16 +1,17 @@
 class GUI {
     constructor(_playerdata) {
         this.playerdata = _playerdata; //PlayerData
-        this.vpLabel = createElement("span", this.playerdata.victorypoints);
-        this.cowLabel = createElement("span", this.playerdata.cow);
-        this.woodLabel = createElement("span", this.playerdata.wood);
-        this.oreLabel = createElement("span", this.playerdata.ore);
-        this.fishLabel = createElement("span", this.playerdata.fish);
-        this.clayLabel = createElement("span", this.playerdata.clay);
-        this.glassLabel = createElement("span", this.playerdata.glass);
-        this.roadLabel = createElement("span", this.playerdata.purchasedRoad);
-        this.villageLabel = createElement("span", this.playerdata.purchasedVillage);
-        this.cityLabel = createElement("span", this.playerdata.purchasedCity);
+        this.keyLabel = createElement("span", this.playerdata.key.toString());
+        this.vpLabel = createElement("span", this.playerdata.victorypoints.toString());
+        this.cowLabel = createElement("span", this.playerdata.cow.toString());
+        this.woodLabel = createElement("span", this.playerdata.wood.toString());
+        this.oreLabel = createElement("span", this.playerdata.ore.toString());
+        this.fishLabel = createElement("span", this.playerdata.fish.toString());
+        this.clayLabel = createElement("span", this.playerdata.clay.toString());
+        this.glassLabel = createElement("span", this.playerdata.glass.toString());
+        this.roadLabel = createElement("span", this.playerdata.purchasedRoad.toString());
+        this.villageLabel = createElement("span", this.playerdata.purchasedVillage.toString());
+        this.cityLabel = createElement("span", this.playerdata.purchasedCity.toString());
         this.roadPurchaseButton = createElement("button", "Purchase");
         this.villagePurchaseButton = createElement("button", "Purchase");
         this.cityPurchaseButton = createElement("button", "Purchase");
@@ -19,6 +20,7 @@ class GUI {
         this.cityPlaceButton = createElement("button", "Place");
         this.cardPurchaseButton = createElement("button", "Purchase");
 
+        this.keyLabel.parent("keyLabel");
         this.vpLabel.parent("vpLabel");
         this.cowLabel.parent("cowLabel");
         this.woodLabel.parent("woodLabel");
@@ -47,16 +49,17 @@ class GUI {
     }
 
     update() {
-        this.vpLabel.html(this.playerdata.victorypoints);
-        this.cowLabel.html(this.playerdata.cow);
-        this.woodLabel.html(this.playerdata.wood);
-        this.oreLabel.html(this.playerdata.ore);
-        this.fishLabel.html(this.playerdata.fish);
-        this.clayLabel.html(this.playerdata.clay);
-        this.glassLabel.html(this.playerdata.glass);
-        this.roadLabel.html(this.playerdata.purchasedRoad);
-        this.villageLabel.html(this.playerdata.purchasedVillage);
-        this.cityLabel.html(this.playerdata.purchasedCity);
+        this.keyLabel.html(this.playerdata.key.toString());
+        this.vpLabel.html(this.playerdata.victorypoints.toString());
+        this.cowLabel.html(this.playerdata.cow.toString());
+        this.woodLabel.html(this.playerdata.wood.toString());
+        this.oreLabel.html(this.playerdata.ore.toString());
+        this.fishLabel.html(this.playerdata.fish.toString());
+        this.clayLabel.html(this.playerdata.clay.toString());
+        this.glassLabel.html(this.playerdata.glass.toString());
+        this.roadLabel.html(this.playerdata.purchasedRoad.toString());
+        this.villageLabel.html(this.playerdata.purchasedVillage.toString());
+        this.cityLabel.html(this.playerdata.purchasedCity.toString());
     }
 
     roadPurchaseClick() {

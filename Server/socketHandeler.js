@@ -33,7 +33,7 @@ class SocketHandeler {
                 socket.send(this.messages.createLoginMessage(Date.now()));
             } else {
                 this.players.forEach(p => {
-                    if (p.key == objeck.key) {
+                    if (p.key == object.key) {
                         p.socket = socket;
                     }
                 });
@@ -41,12 +41,25 @@ class SocketHandeler {
         }
 
         if (object.type === "JOIN") {
-            console.log("PLAYER '" + object.return.name + "' (" + object.key + ") ATTEMPTING TO JOIN GAME '" + object.return.gameCode + "'");
+            console.log("PLAYER '" + object.return.name + "' (" + object.key + ") ATTEMPTING TO JOIN GAME '" + object.return.gameCode + "'!");
             let newPlayer = this.player.create(object.key, socket, object.return.name, object.return.gameCode);
             this.players.push(newPlayer);
             let joinGame = this.getGameFromKey(object.return.gameCode);
             joinGame.players.push(newPlayer);
             newPlayer.socket.send(this.messages.createUpdateMapMessage(joinGame.map.map));
+        }
+
+        if (object.type === "START") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            console.log("ATTEMPTING TO START GAME '" + gme.key + "'!");
+            gme.start();
+        }
+
+        if (object.type === "VILLAGEONE") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.place(object);
         }
     }
 
@@ -62,10 +75,18 @@ class SocketHandeler {
     createGame(_key) {
         let data = this.game.create(_key);
         this.games.push(data);
-        console.log("CREATED GAME '" + _key + "'");
+        console.log("CREATED GAME '" + _key + "'!");
         return data;
     }
 
+    getPlayerFromKey(_key) {
+        for (let i=0;i<this.players.length;i++) {
+            if (this.players[i].key == _key) {
+                return this.players[i];
+            }
+            return undefined;
+        }
+    }
 }
 
 module.exports = new SocketHandeler();

@@ -21,9 +21,12 @@ class Tile {
         let tmppos = this.realPos();
         stroke(0,0,0,0);
         image(ASSETS.IMAGES[this.type], tmppos.x, tmppos.y, this.size, this.size);
+        textAlign(RIGHT, TOP);
+        textSize(12);
+        text("("+this.pos.x+","+this.pos.y+")", tmppos.x, tmppos.y, this.size, this.size);
         textAlign(CENTER, CENTER);
         textSize(32);
-        text(str(this.number), tmppos.x, tmppos.y, this.size, this.size);
+        text(this.number.toString(), tmppos.x, tmppos.y, this.size, this.size);
     }
 
 }

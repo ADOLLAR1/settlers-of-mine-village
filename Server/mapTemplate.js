@@ -5,7 +5,7 @@ class MapTemplate {
         this.types = [
             {type:"Plain",res:"Cow"},
             {type:"Forest",res:"Wood"},
-            {type:"Mountian",res:"Ore"},
+            {type:"Mountain",res:"Ore"},
             {type:"Swamp",res:"Clay"},
             {type:"Desert",res:"Glass"}
         ];

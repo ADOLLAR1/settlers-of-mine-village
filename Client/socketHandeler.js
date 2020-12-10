@@ -1,7 +1,8 @@
 class SocketHandeler {
-    constructor(_url) {
+    constructor(_url, _playerData) {
         this.url = _url;
         this.socket = undefined;
+        this.playerData = _playerData;
     }
 
     create() {
@@ -32,7 +33,8 @@ class SocketHandeler {
         object.run.forEach(command => {
             if (command.type === "SET") {
                 playerdata[command.name] = command.value;
-                data.return[command.name] = command.value
+                gui.update();
+                data.return[command.name] = command.value;
             } else if (command.type === "MESSAGE") {
                 data.return[command.name] = undefined;
                 alert(command.message);
@@ -46,6 +48,8 @@ class SocketHandeler {
                 data.return[command.name] = undefined;
                 socketHandeler.decodeMap(command.value);
 
+            } else if (command.type === "PLACE") {
+                data.return[command.name] = placeHandeler.promptPlace(command.value);
             }
         });
         data.key = playerdata.key;
@@ -88,5 +92,13 @@ class SocketHandeler {
 
     posKey(_x, _y) {
         return (_x + "-" + _y);
+    }
+
+    startGame() {
+        this.socket.send(JSON.stringify({
+            "type": "START",
+            "key": this.playerData.key,
+            "return": {}
+        }));
     }
 }

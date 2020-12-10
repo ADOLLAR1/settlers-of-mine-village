@@ -11,6 +11,7 @@ let cities = [];
 let gui;
 let playerdata;
 let socketHandeler;
+let placeHandeler;
 
 function preload() {
     loadImages();
@@ -20,16 +21,9 @@ function setup() {
     createCanvas(870,870);
     playerdata = new PlayerData("", [0,0,0]);
     gui = new GUI(playerdata);
-    socketHandeler = new SocketHandeler("ws://127.0.0.1:15000");
+    socketHandeler = new SocketHandeler("ws://127.0.0.1:15000", playerdata);
     socketHandeler.create();
-    for (let i=0;i<16;i+=2) {
-        for (let j=0;j<16;j+=2) {
-            tiles.push(new Tile("DevGrass", i, j, Math.floor(Math.random()*12+1)));
-            roads.push(new RoadSlot(i+1,j,false));
-            roads.push(new RoadSlot(i,j+1,true));
-            roads.push(new RoadSlot(i+1,j+1,null));
-        }
-    }
+    placeHandeler = new PlaceHandeler();
 }
 
 function draw() {
@@ -73,4 +67,9 @@ function mousePressed() {
 function loadImages() {
     ASSETS.IMAGES.DevGrass = loadImage("Assets/devGrass.png");
     ASSETS.IMAGES.Ocean = loadImage("Assets/ocean.png");
+    ASSETS.IMAGES.Plain = loadImage("Assets/plains.png");
+    ASSETS.IMAGES.Forest = loadImage("Assets/forest.png");
+    ASSETS.IMAGES.Mountain = loadImage("Assets/mountain.png");
+    ASSETS.IMAGES.Swamp = loadImage("Assets/swamp.png");
+    ASSETS.IMAGES.Desert = loadImage("Assets/desert.png");
 }
