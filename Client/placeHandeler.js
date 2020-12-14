@@ -14,10 +14,10 @@ class PlaceHandeler {
             }
         } else {
             while ((parseInt(x) % 2 == 0 && parseInt(y) % 2 == 0) || (parseInt(x) % 2 == 1 && parseInt(y) % 2 == 1)) {
-                while (x === "" || x == undefined || parseInt(x) == Number.NaN) {
+                while (x === "" || x == undefined || parseInt(x) == Number.NaN || x == 0) {
                     x = prompt("Please enter a x coordinate for the road!");
                 }
-                while (y === "" || y == undefined || parseInt(y) == Number.NaN) {
+                while (y === "" || y == undefined || parseInt(y) == Number.NaN || y == 0) {
                     y = prompt("Please enter a y coordinate for the road!");
                 }
             }

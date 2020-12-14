@@ -3,7 +3,7 @@ class PlayerData {
 
     }
 
-    create(_name) {
+    create(_name, _color) {
         return {
             "name": _name,
             "cow": 0,
@@ -18,7 +18,8 @@ class PlayerData {
             "purchasedRoad": 0,
             "purchasedVillage": 0,
             "purchasedCity": 0,
-            "cards": []
+            "cards": [],
+            "color": _color
         };
     }
 }

@@ -41,10 +41,10 @@ class SocketHandeler {
         }
 
         if (object.type === "JOIN") {
-            console.log("PLAYER '" + object.return.name + "' (" + object.key + ") ATTEMPTING TO JOIN GAME '" + object.return.gameCode + "'!");
-            let newPlayer = this.player.create(object.key, socket, object.return.name, object.return.gameCode);
-            this.players.push(newPlayer);
             let joinGame = this.getGameFromKey(object.return.gameCode);
+            console.log("PLAYER '" + object.return.name + "' (" + object.key + ") ATTEMPTING TO JOIN GAME '" + object.return.gameCode + "'!");
+            let newPlayer = this.player.create(object.key, socket, object.return.name, object.return.gameCode, joinGame.colors.pop());
+            this.players.push(newPlayer);
             joinGame.players.push(newPlayer);
             newPlayer.socket.send(this.messages.createUpdateMapMessage(joinGame.map.map));
         }
@@ -59,7 +59,15 @@ class SocketHandeler {
         if (object.type === "VILLAGEONE") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
-            gme.place(object);
+            gme.place(object.return.Village1, plr, true);
+            gme.place(object.return.Road1, plr, false);
+        }
+
+        if (object.type === "VILLAGETWO") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.place(object.return.Village1, plr, null);
+            gme.place(object.return.Road1, plr, false);
         }
     }
 
