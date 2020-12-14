@@ -56,7 +56,8 @@ class Game {
             if (_object.type === "ROAD") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && !(_object.x % 2 == _object.y % 2)) {
                     console.log("ROAD1");
-                    if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player)) {
+                    if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player) && _player.playerdata.purchasedRoad >= 1) {
+                        _player.playerData.purchasedRoad--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
                         console.log(this.players);
                         for (let i=0; i < this.players.length; i++) {
@@ -169,7 +170,8 @@ class Game {
                                 }));
                             }
                         }
-                    } else if (_flag == true) {
+                    } else if (_flag == true && _player.playerdata.road >= 1) {
+                        _player.playerData.road--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
@@ -194,7 +196,8 @@ class Game {
             }
             if (_object.type === "VILLAGE") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1) {
-                    if (_flag == false && this.checkNeighbours(_object.x, _object.y, _player)) {
+                    if (_flag == false && this.checkNeighbours(_object.x, _object.y, _player) && _player.playerdata.purchasedVillage >= 1) {
+                        _player.playerData.purchasedVillage--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.villageClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
@@ -214,7 +217,8 @@ class Game {
                                 ]
                             }));
                         }
-                    } else if (_flag == true) {
+                    } else if (_flag == true && _player.playerdata.village >= 1) {
+                        _player.playerData.village--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.villageClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
@@ -239,8 +243,10 @@ class Game {
             }
             if (_object.type === "CITY") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined) return;
-                if (this.map.map[this.mapClass.posKey(_object.x, _object.y)].player == _player && this.map.map[this.mapClass.posKey(_object.x, _object.y)].name === "VILLAGE" && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1) {
+                if (this.map.map[this.mapClass.posKey(_object.x, _object.y)].player == _player && this.map.map[this.mapClass.posKey(_object.x, _object.y)].name === "VILLAGE" && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1  && _player.playerdata.purchasedCity >= 1) {
                     this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.cityClass.create(_object.x, _object.y, _player);
+                    _player.playerData.purchasedCity--;
+                    _player.playerData.village++;
                     for (let i=0; i < this.players.length; i++) {
                         this.players[i].socket.send(JSON.stringify({
                             "type": "BUILD",
@@ -261,6 +267,7 @@ class Game {
                     }
                 }
             }
+            this.updatePlayerdata();
         }
 
         data.checkNeighbours = function(_x, _y, _player) {
@@ -345,21 +352,25 @@ class Game {
             let num = a + b;
             if (num != 7) {
                 this.map.collectResources(num,this.players);
-                for (let i=0; i<this.players.length; i++) {
-                    this.players[i].socket.send(JSON.stringify({
-                        "type": "ROLL",
-                        "return": false,
-                        "run": [
-                            {
-                                "type": "PLAYERDATA",
-                                "name": "PLAYERDATA",
-                                "value": this.players[i].playerData
-                            }
-                        ]
-                    }));
-                }
+                this.updatePlayerdata();
             } else {
                 //PILLAGE CODE
+            }
+        }
+
+        data.updatePlayerdata = function() {
+            for (let i=0; i<this.players.length; i++) {
+                this.players[i].socket.send(JSON.stringify({
+                    "type": "ROLL",
+                    "return": false,
+                    "run": [
+                        {
+                            "type": "PLAYERDATA",
+                            "name": "PLAYERDATA",
+                            "value": this.players[i].playerData
+                        }
+                    ]
+                }));
             }
         }
 
