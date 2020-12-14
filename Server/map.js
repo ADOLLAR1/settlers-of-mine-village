@@ -29,6 +29,7 @@ class Map {
     create() {
         let data = {};
         data.name = "MAP";
+        data.class = this;
         data.map = {};
         data.numbers = this.shuffle([
             2,2,2,2,2,2,
@@ -66,11 +67,51 @@ class Map {
                 } 
             }
         }
-        return data;
-    }
 
-    place(_map, _playerData, _type, _x, _y) {
-        //PLACE A STRUCTURE
+        data.collectResources = function(_num) {
+            for (let i=0; i<15; i++) {
+                for (let j=0; j<15; j++) {
+                    if (j % 2 == i % 2 && j % 2 == 0) {
+                        let tile = this.map[this.class.posKey(j,i)];
+                        let a = this.map[this.class.posKey(j-1, i-1)];
+                        let b = this.map[this.class.posKey(parseInt(j)+1, parseInt(i)+1)];
+                        let c = this.map[this.class.posKey(parseInt(j)+1, i-1)];
+                        let d = this.map[this.class.posKey(j-1, parseInt(i)+1)];
+                        if (a != undefined) {
+                            if (a.name === "VILLAGE") {
+                                a.player.playerData[tile.resource]++;
+                            } else if (a.name === "CITY") {
+                                a.player.playerData[tile.resource] += 2;
+                            }
+                        }
+                        if (b != undefined) {
+                            if (b.name === "VILLAGE") {
+                                b.player.playerData[tile.resource]++;
+                            } else if (b.name === "CITY") {
+                                b.player.playerData[tile.resource] += 2;
+                            }
+                        }
+                        if (c != undefined) {
+                            if (c.name === "VILLAGE") {
+                                c.player.playerData[tile.resource]++;
+                            } else if (c.name === "CITY") {
+                                c.player.playerData[tile.resource] += 2;
+                            }
+                        }
+                        if (d != undefined) {
+                            if (d.name === "VILLAGE") {
+                                d.player.playerData[tile.resource]++;
+                            } else if (d.name === "CITY") {
+                                d.player.playerData[tile.resource] += 2;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return data;
     }
 }
 

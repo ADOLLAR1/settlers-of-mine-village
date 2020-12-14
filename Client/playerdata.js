@@ -15,7 +15,7 @@ class PlayerData {
         this.purchasedRoad = 0; //int
         this.purchasedVillage = 0; //int
         this.purchasedCity = 0; //int
-        this.victorypoints = 0; //int
+        this.victoryPoints = 0; //int
         this.cards = []; //[int, int, ...]
     }
 
@@ -33,4 +33,23 @@ class PlayerData {
         return this[key];
     }
 
+    updateAll(_in) {
+        this.key = _in.key;
+        this.name = _in.name;
+        this.color = _in.color;
+        this.cow = _in.cow;
+        this.wood = _in.wood;
+        this.ore = _in.ore;
+        this.fish = _in.fish;
+        this.clay = _in.clay;
+        this.glass = _in.glass;
+        this.road = _in.road;
+        this.village = _in.village;
+        this.city = _in.city;
+        this.purchasedRoad = _in.purchasedRoad;
+        this.purchasedVillage = _in.purchasedVillage;
+        this.purchasedCity = _in.purchasedCity;
+        this.victoryPoints = _in.victorypoints;
+        this.cards = [];
+    }    
 }

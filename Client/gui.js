@@ -2,7 +2,7 @@ class GUI {
     constructor(_playerdata) {
         this.playerdata = _playerdata; //PlayerData
         this.keyLabel = createElement("span", this.playerdata.key.toString());
-        this.vpLabel = createElement("span", this.playerdata.victorypoints.toString());
+        this.vpLabel = createElement("span", this.playerdata.victoryPoints.toString());
         this.cowLabel = createElement("span", this.playerdata.cow.toString());
         this.woodLabel = createElement("span", this.playerdata.wood.toString());
         this.oreLabel = createElement("span", this.playerdata.ore.toString());
@@ -50,7 +50,7 @@ class GUI {
 
     update() {
         this.keyLabel.html(this.playerdata.key.toString());
-        this.vpLabel.html(this.playerdata.victorypoints.toString());
+        this.vpLabel.html(this.playerdata.victoryPoints.toString());
         this.cowLabel.html(this.playerdata.cow.toString());
         this.woodLabel.html(this.playerdata.wood.toString());
         this.oreLabel.html(this.playerdata.ore.toString());

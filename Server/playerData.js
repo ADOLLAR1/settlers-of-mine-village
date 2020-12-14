@@ -19,7 +19,8 @@ class PlayerData {
             "purchasedVillage": 0,
             "purchasedCity": 0,
             "cards": [],
-            "color": _color
+            "color": _color,
+            "victoryPoints": 0
         };
     }
 }

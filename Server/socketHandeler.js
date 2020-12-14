@@ -59,15 +59,15 @@ class SocketHandeler {
         if (object.type === "VILLAGEONE") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
-            gme.place(object.return.Village1, plr, true);
-            gme.place(object.return.Road1, plr, false);
+            gme.place(object.return.Village1, plr, true, false);
+            gme.place(object.return.Road1, plr, false, true);
         }
 
         if (object.type === "VILLAGETWO") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
-            gme.place(object.return.Village1, plr, null);
-            gme.place(object.return.Road1, plr, false);
+            gme.place(object.return.Village1, plr, true, false);
+            gme.place(object.return.Road1, plr, false, null);
         }
     }
 
@@ -92,8 +92,8 @@ class SocketHandeler {
             if (this.players[i].key == _key) {
                 return this.players[i];
             }
-            return undefined;
         }
+        return undefined;
     }
 }
 
