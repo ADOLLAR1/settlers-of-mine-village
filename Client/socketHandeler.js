@@ -14,14 +14,17 @@ class SocketHandeler {
     }
 
     socketOpen(event) {
-
+        
     }
 
     socketClose(event) {
+        console.log("CLOSED: ");
+        console.log(event);
         socketHandeler.create()
     }
 
     socketError(event) {
+        console.log("ERROR: ");
         console.error(event);
     }
 
@@ -50,6 +53,9 @@ class SocketHandeler {
 
             } else if (command.type === "PLACE") {
                 data.return[command.name] = placeHandeler.promptPlace(command.value);
+            }  else if (command.type === "BUILD") {
+                data.return[command.name] = undefined;
+                placeHandeler.place(command.value.type, command.value.x, command.value.y, command.value.color);
             }
         });
         data.key = playerdata.key;

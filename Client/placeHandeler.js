@@ -28,4 +28,21 @@ class PlaceHandeler {
             "y": y
         };
     }
+
+    place(_type, _x, _y, _color) {
+        let dir;
+        if (_y % 2 == 0) {
+            dir = false;
+        } else if (_x % 2 == 0) {
+            dir = true
+        } else {dir = null;}
+
+        if (_type === "ROAD") {
+            roads.push(new Road(_color, _x, _y, dir));
+        } else if (_type === "VILLAGE") {
+            villages.push(new Village(_color, _x, _y));
+        } else if (_type === "CITY") {
+            cities.push(new City(_color, _x, _y));
+        }
+    }
 }

@@ -1,6 +1,6 @@
 class Road {
-    constructor(_playerdata, _x, _y, _direction) {
-        this.playerdata = _playerdata; //CLASS:PlayerData
+    constructor(_color, _x, _y, _direction) {
+        this.color = _color; //[int, int, int]
         this.pos = {x: _x, y: _y}; //{int,int}
         this.direction = _direction; //Bool 0=vertical 1=horizontal
         this.size = 10; //int
@@ -20,7 +20,7 @@ class Road {
     draw() {
         stroke(0,0,0,0);
         let tmppos = this.realPos();
-        fill(this.playerdata.color);
+        fill(this.color);
         if (this.direction) {
             rect(tmppos.x, tmppos.y, this.tileSize, this.size);
         } else {

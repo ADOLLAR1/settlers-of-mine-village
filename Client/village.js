@@ -1,6 +1,6 @@
 class Village {
-    constructor(_playerdata, _x, _y) {
-        this.playerdata = _playerdata; //CLASS:PlayerData
+    constructor(_color, _x, _y) {
+        this.color = _color; //[int, int, int]
         this.pos = {x: _x, y: _y}; //{int,int}
         this.size = 10; //int
         this.tileSize = 100; //int
@@ -20,7 +20,7 @@ class Village {
     draw() {
         stroke(0,0,0,0);
         let tmppos = this.realPos();
-        fill(this.playerdata.color);
+        fill(this.color);
         rect(tmppos.x, tmppos.y, this.size, this.size);
     }
 
