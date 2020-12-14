@@ -3,24 +3,25 @@ class PlayerData {
 
     }
 
-    create(_name, _color) {
+    create(_name, _color, _key) {
         return {
             "name": _name,
-            "cow": 0,
-            "wood": 0,
-            "ore": 0,
-            "fish": 0,
-            "clay": 0,
-            "glass": 0,
-            "road": 25,
+            "cow": 10,
+            "wood": 10,
+            "ore": 10,
+            "fish": 10,
+            "clay": 10,
+            "glass": 10,
+            "road": 23,
             "village": 5,
             "city": 5,
-            "purchasedRoad": 0,
+            "purchasedRoad": 2,
             "purchasedVillage": 0,
             "purchasedCity": 0,
             "cards": [],
             "color": _color,
-            "victoryPoints": 0
+            "victoryPoints": 0,
+            "key": _key
         };
     }
 }

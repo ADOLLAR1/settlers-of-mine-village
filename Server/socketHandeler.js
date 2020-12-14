@@ -69,6 +69,11 @@ class SocketHandeler {
             gme.place(object.return.Village1, plr, true, false);
             gme.place(object.return.Road1, plr, false, null);
         }
+        if (object.type === "PURCHASE") {
+            let plr = this.getPlayerFromKey(object.key);
+            this.purchase(object.return.purchase, plr);
+            
+        }
     }
 
     getGameFromKey(_key) {
@@ -94,6 +99,45 @@ class SocketHandeler {
             }
         }
         return undefined;
+    }
+
+    purchase(_type, _player) {
+        if (_type === "ROAD") {
+            if (_player.playerData.clay >= 1 && _player.playerData.wood >= 1 && _player.playerData.road >= 1) {
+                _player.playerData.clay--;
+                _player.playerData.wood--;
+                _player.playerData.road--;
+                _player.playerData.purchasedRoad++;
+            }
+        } else if (_type === "VILLAGE") {
+            if (_player.playerData.cow >= 1 && _player.playerData.wood >= 1 && _player.playerData.fish >= 1 && _player.playerData.glass >= 1 && _player.playerData.village >= 1) {
+                _player.playerData.cow--;
+                _player.playerData.wood--;
+                _player.playerData.fish--;
+                _player.playerData.glass--;
+                _player.playerData.village--;
+                _player.playerData.purchasedVillage++;
+            }
+        } else if (_type === "CITY") {
+            if (_player.playerData.clay >= 2 && _player.playerData.ore >= 2 && _player.playerData.city >= 1) {
+                _player.playerData.clay -= 2;
+                _player.playerData.ore -= 2;
+                _player.playerData.city--;
+                _player.playerData.purchasedCity++;
+            }
+        }
+
+        _player.socket.send(JSON.stringify({
+            "type": "PURCHASE",
+            "return": false,
+            "run": [
+                {
+                    "type": "PLAYERDATA",
+                    "name": "PLAYERDATA",
+                    "value": _player.playerData
+                }
+            ]
+        }));
     }
 }
 

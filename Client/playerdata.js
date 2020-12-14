@@ -49,7 +49,7 @@ class PlayerData {
         this.purchasedRoad = _in.purchasedRoad;
         this.purchasedVillage = _in.purchasedVillage;
         this.purchasedCity = _in.purchasedCity;
-        this.victoryPoints = _in.victorypoints;
+        this.victoryPoints = _in.victoryPoints;
         this.cards = [];
     }    
 }

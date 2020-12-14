@@ -56,7 +56,8 @@ class SocketHandeler {
                 data.return[command.name] = undefined;
                 placeHandeler.place(command.value.type, command.value.x, command.value.y, command.value.color);
             } else if (command.type === "PLAYERDATA") {
-                
+                playerdata.updateAll(command.value);
+                gui.update();
             }
         });
         data.key = playerdata.key;
@@ -99,6 +100,16 @@ class SocketHandeler {
 
     posKey(_x, _y) {
         return (_x + "-" + _y);
+    }
+
+    purchase(_type) {
+        this.socket.send(JSON.stringify({
+            "type": "PURCHASE",
+            "key": playerdata.key,
+            "return": {
+                "purchase": _type
+            }
+        }));
     }
 
     startGame() {

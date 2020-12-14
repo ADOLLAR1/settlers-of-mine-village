@@ -56,7 +56,7 @@ class Game {
             if (_object.type === "ROAD") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && !(_object.x % 2 == _object.y % 2)) {
                     console.log("ROAD1");
-                    if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player) && _player.playerdata.purchasedRoad >= 1) {
+                    if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player) && _player.playerData.purchasedRoad >= 1) {
                         _player.playerData.purchasedRoad--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
                         console.log(this.players);
@@ -198,6 +198,7 @@ class Game {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1) {
                     if (_flag == false && this.checkNeighbours(_object.x, _object.y, _player) && _player.playerdata.purchasedVillage >= 1) {
                         _player.playerData.purchasedVillage--;
+                        _player.playerData.victoryPoints++;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.villageClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
@@ -217,8 +218,9 @@ class Game {
                                 ]
                             }));
                         }
-                    } else if (_flag == true && _player.playerdata.village >= 1) {
+                    } else if (_flag == true && _player.playerData.village >= 1) {
                         _player.playerData.village--;
+                        _player.playerData.victoryPoints++;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.villageClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
@@ -247,6 +249,7 @@ class Game {
                     this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.cityClass.create(_object.x, _object.y, _player);
                     _player.playerData.purchasedCity--;
                     _player.playerData.village++;
+                    _player.playerData.victoryPoints++;
                     for (let i=0; i < this.players.length; i++) {
                         this.players[i].socket.send(JSON.stringify({
                             "type": "BUILD",
@@ -350,6 +353,7 @@ class Game {
             let a = Math.floor(Math.random()*6)+1;
             let b = Math.floor(Math.random()*6)+1;
             let num = a + b;
+            this.tellDice(num);
             if (num != 7) {
                 this.map.collectResources(num,this.players);
                 this.updatePlayerdata();
@@ -368,6 +372,22 @@ class Game {
                             "type": "PLAYERDATA",
                             "name": "PLAYERDATA",
                             "value": this.players[i].playerData
+                        }
+                    ]
+                }));
+            }
+        }
+
+        data.tellDice = function(_num) {
+            for (let i=0; i<this.players.length; i++) {
+                this.players[i].socket.send(JSON.stringify({
+                    "type": "ROLL",
+                    "return": false,
+                    "run": [
+                        {
+                            "type": "MESSAGE",
+                            "name": "DICE",
+                            "message": "A " + _num + " was rolled!"
                         }
                     ]
                 }));

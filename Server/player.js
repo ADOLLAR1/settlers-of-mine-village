@@ -8,7 +8,7 @@ class Player {
             "key": _key,
             "socket": _socket,
             "gameCode": _gameCode,
-            "playerData": this.playerData.create(_name, _color)
+            "playerData": this.playerData.create(_name, _color, _key)
         };
     }
 }

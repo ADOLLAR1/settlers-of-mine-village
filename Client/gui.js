@@ -19,6 +19,7 @@ class GUI {
         this.villagePlaceButton = createElement("button", "Place");
         this.cityPlaceButton = createElement("button", "Place");
         this.cardPurchaseButton = createElement("button", "Purchase");
+        this.endTurnButton = createElement("button", "End Turn");
 
         this.keyLabel.parent("keyLabel");
         this.vpLabel.parent("vpLabel");
@@ -38,6 +39,7 @@ class GUI {
         this.villagePlaceButton.parent("villagePlace");
         this.cityPlaceButton.parent("cityPlace");
         this.cardPurchaseButton.parent("cardPurchase");
+        this.endTurnButton.parent("end");
 
         this.roadPurchaseButton.mouseClicked(() => {this.roadPurchaseClick()});
         this.villagePurchaseButton.mouseClicked(() => {this.villagePurchaseClick()});
@@ -46,6 +48,7 @@ class GUI {
         this.villagePlaceButton.mouseClicked(() => {this.villagePlaceClick()});
         this.cityPlaceButton.mouseClicked(() => {this.cityPlaceClick()});
         this.cardPurchaseButton.mouseClicked(() => {this.cardPurchaseClick()});
+        this.endTurnButton.mouseClicked(() => {this.endTurnClick()});
     }
 
     update() {
@@ -63,15 +66,15 @@ class GUI {
     }
 
     roadPurchaseClick() {
-
+        socketHandeler.purchase("ROAD");
     }
 
     villagePurchaseClick() {
-
+        socketHandeler.purchase("VILLAGE");
     }
 
     cityPurchaseClick() {
-
+        socketHandeler.purchase("CITY");
     }
 
     roadPlaceClick() {
@@ -87,6 +90,10 @@ class GUI {
     }
 
     cardPurchaseClick() {
+
+    }
+
+    endTurnClick() {
 
     }
 }
