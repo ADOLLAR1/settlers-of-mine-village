@@ -59,7 +59,6 @@ class Game {
             }
             if (_object.type === "ROAD") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && !(_object.x % 2 == _object.y % 2)) {
-                    console.log("ROAD1");
                     if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player) && _player.playerData.purchasedRoad >= 1) {
                         _player.playerData.purchasedRoad--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
@@ -371,7 +370,7 @@ class Game {
 
         data.rollDice = function() {
             this.turnIndex++;
-            if (this.turnIndex = this.players.length) this.turnIndex = 0;
+            if (this.turnIndex == this.players.length) this.turnIndex = 0;
             this.players[this.turnIndex].socket.send(JSON.stringify({
                 "type": "TURNALERT",
                 "return": false,
@@ -388,7 +387,7 @@ class Game {
             let num = a + b;
             this.tellDice(num);
             if (num != 7) {
-                this.map.collectResources(num,this.players);
+                this.map.collectResources(num);
                 this.updatePlayerdata();
             } else {
                 //PILLAGE CODE
