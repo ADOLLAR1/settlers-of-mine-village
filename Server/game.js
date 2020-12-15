@@ -62,7 +62,6 @@ class Game {
                     if (_flag == false && this.checkNeighboursRoad(_object.x, _object.y, _player) && _player.playerData.purchasedRoad >= 1) {
                         _player.playerData.purchasedRoad--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
-                        console.log(this.players);
                         for (let i=0; i < this.players.length; i++) {
                             this.players[i].socket.send(JSON.stringify({
                                 "type": "BUILD",
@@ -173,7 +172,7 @@ class Game {
                                 }));
                             }
                         }
-                    } else if (_flag == true && _player.playerdata.road >= 1) {
+                    } else if (_flag == true && _player.playerData.road >= 1) {
                         _player.playerData.road--;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.roadClass.create(_object.x, _object.y, _player);
                         for (let i=0; i < this.players.length; i++) {
@@ -199,7 +198,7 @@ class Game {
             }
             if (_object.type === "VILLAGE") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1) {
-                    if (_flag == false && this.checkNeighbours(_object.x, _object.y, _player) && _player.playerdata.purchasedVillage >= 1) {
+                    if (_flag == false && this.checkNeighbours(_object.x, _object.y, _player) && _player.playerData.purchasedVillage >= 1) {
                         _player.playerData.purchasedVillage--;
                         _player.playerData.victoryPoints++;
                         this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.villageClass.create(_object.x, _object.y, _player);
@@ -248,7 +247,7 @@ class Game {
             }
             if (_object.type === "CITY") {
                 if (this.map.map[this.mapClass.posKey(_object.x, _object.y)] == undefined) return;
-                if (this.map.map[this.mapClass.posKey(_object.x, _object.y)].player == _player && this.map.map[this.mapClass.posKey(_object.x, _object.y)].name === "VILLAGE" && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1  && _player.playerdata.purchasedCity >= 1) {
+                if (this.map.map[this.mapClass.posKey(_object.x, _object.y)].player == _player && this.map.map[this.mapClass.posKey(_object.x, _object.y)].name === "VILLAGE" && (_object.x % 2 == _object.y % 2) && _object.x % 2 == 1  && _player.playerData.purchasedCity >= 1) {
                     this.map.map[this.mapClass.posKey(_object.x, _object.y)] = this.cityClass.create(_object.x, _object.y, _player);
                     _player.playerData.purchasedCity--;
                     _player.playerData.village++;
@@ -397,7 +396,7 @@ class Game {
         data.updatePlayerdata = function() {
             for (let i=0; i<this.players.length; i++) {
                 this.players[i].socket.send(JSON.stringify({
-                    "type": "ROLL",
+                    "type": "PLAYERDATA",
                     "return": false,
                     "run": [
                         {
