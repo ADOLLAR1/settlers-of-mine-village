@@ -93,7 +93,7 @@ class GUI {
     }
 
     cardPurchaseClick() {
-        socketHandeler.attemptPlace("CARD");
+        socketHandeler.purchase("CARD");
     }
 
     card1PlayClick() {
