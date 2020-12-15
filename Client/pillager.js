@@ -19,9 +19,6 @@ class Pillager {
         let tmppos = this.realPos();
         stroke(0,0,0,0);
         image(ASSETS.IMAGES["Pillager"], tmppos.x, tmppos.y, this.size, this.size);
-        textAlign(CENTER, CENTER);
-        textSize(32);
-        text(str(this.number), tmppos.x, tmppos.y, this.size, this.size);
     }
 
 }

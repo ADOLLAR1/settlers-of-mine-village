@@ -88,6 +88,12 @@ class SocketHandeler {
             let gme = this.getGameFromKey(plr.gameCode);
             gme.endTurn(plr);
         }
+
+        if (object.type === "PLACEPILLAGER") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.placePillager(plr, object.return.data);
+        }
     }
 
     getGameFromKey(_key) {

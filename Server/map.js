@@ -44,6 +44,8 @@ class Map {
         ]);
         data.templateClass = require('./mapTemplate.js');
         data.template = data.templateClass.pickRandom();
+        data.pillagerClass = require("./pillager.js");
+        data.pillager = data.pillagerClass.create();
         data.tile = require("./tile.js");
         data.river = require("./river.js");
 
@@ -67,16 +69,16 @@ class Map {
                         d = this.map[this.posKey(j-1, parseInt(i)+1)];
 
                         if (a != undefined && tile != undefined) {
-                            if (a.number == _num) {
+                            if (a.number == _num && a.pos != this.pillager.pos) {
                                 if (tile.name === "VILLAGE") {
                                     tile.player.playerData[a.resource]++;
-                                } else if (tile.name === "CITY") {);
+                                } else if (tile.name === "CITY") {
                                     tile.player.playerData[a.resource] += 2;
                                 }
                             }
                         }
                         if (b != undefined && tile != undefined) {
-                            if (b.number == _num) {
+                            if (b.number == _num && b.pos != this.pillager.pos) {
                                 if (tile.name === "VILLAGE") {
                                     tile.player.playerData[b.resource]++;
                                 } else if (tile.name === "CITY") {
@@ -85,7 +87,7 @@ class Map {
                             }
                         }
                         if (c != undefined && tile != undefined) {
-                            if (c.number == _num) {
+                            if (c.number == _num && c.pos != this.pillager.pos) {
                                 if (tile.name === "VILLAGE") {
                                     tile.player.playerData[c.resource]++;
                                 } else if (tile.name === "CITY") {
@@ -94,7 +96,7 @@ class Map {
                             }
                         }
                         if (d != undefined && tile != undefined) {
-                            if (d.number == _num) {
+                            if (d.number == _num && d.pos != this.pillager.pos) {
                                 if (tile.name === "VILLAGE") {
                                     tile.player.playerData[d.resource]++;
                                 } else if (tile.name === "CITY") {

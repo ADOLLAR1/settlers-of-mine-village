@@ -12,6 +12,7 @@ let gui;
 let playerdata;
 let socketHandeler;
 let placeHandeler;
+let pillager;
 
 function preload() {
     loadImages();
@@ -24,6 +25,7 @@ function setup() {
     socketHandeler = new SocketHandeler("ws://127.0.0.1:15000", playerdata);
     socketHandeler.create();
     placeHandeler = new PlaceHandeler();
+    pillager = new Pillager(-2, -2);
 }
 
 function draw() {
@@ -59,6 +61,8 @@ function draw() {
             c.draw()
         } 
     });
+
+    pillager.draw();
 }
 
 function mousePressed() {
@@ -72,4 +76,5 @@ function loadImages() {
     ASSETS.IMAGES.Mountain = loadImage("Assets/mountain.png");
     ASSETS.IMAGES.Swamp = loadImage("Assets/swamp.png");
     ASSETS.IMAGES.Desert = loadImage("Assets/desert.png");
+    ASSETS.IMAGES.Pillager = loadImage("Assets/pillager.png");
 }

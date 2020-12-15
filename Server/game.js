@@ -389,7 +389,81 @@ class Game {
                 this.map.collectResources(num);
                 this.updatePlayerdata();
             } else {
-                //PILLAGE CODE
+                this.handlePillager()
+            }
+        }
+
+        data.handlePillager = function() {
+            let plr;
+            let plrdata;
+            let total;
+            let toRemove = 0;
+            let res = "cow";
+            for (let i=0; i<this.players.length; i++) {
+                plr = this.players[i];
+                plrdata = plr.playerData;
+                total = plrdata.cow + plrdata.wood + plrdata.ore + plrdata.fish + plrdata.clay + plrdata.glass;
+                if (total >= 7) {
+                    toRemove = Math.ceil(total/2);
+                } else {toRemove = 0}
+                if (toRemove > 0) {
+                    for (let j=0; j<toRemove; j++) {
+                        res = "cow";
+                        if (plrdata.wood > plrdata[res]) {res = "wood";}
+                        if (plrdata.ore > plrdata[res]) {res = "ore";}
+                        if (plrdata.fish > plrdata[res]) {res = "fish";}
+                        if (plrdata.clay > plrdata[res]) {res = "clay";}
+                        if (plrdata.glass > plrdata[res]) {res = "glass";}
+                        plrdata[res]--;
+                    }
+
+                    plr.socket.send(JSON.stringify({
+                        "type": "PILLAGED",
+                        "return": false,
+                        "run": [
+                            {
+                                "type": "MESSAGE",
+                                "name": "PILLAGED",
+                                "message": "Pillaged! " + toRemove + " resources were pillaged."
+                            }
+                        ]
+                    }));
+                }
+            }
+
+            this.players[this.turnIndex].socket.send(JSON.stringify({
+                "type": "PLACEPILLAGER",
+                "return": true,
+                "run": [
+                    {
+                        "type": "PLACEPILLAGER",
+                        "name": "data"
+                    }
+                ]
+            }));
+        }
+
+        data.placePillager = function(_player, _data) {
+            let pos = {x: _data.x, y: _data.y};
+            if (_player == this.players[this.turnIndex]) {
+                this.map.pillager.pos = pos;
+                this.updatePillager();
+            }
+        }
+
+        data.updatePillager = function() {
+            for (let i=0; i<this.players.length; i++) {
+                this.players[i].socket.send(JSON.stringify({
+                    "type": "PILLAGER",
+                    "return": false,
+                    "run": [
+                        {
+                            "type": "PILLAGER",
+                            "name": "PILLAGER",
+                            "value": this.map.pillager.pos
+                        }
+                    ]
+                }));
             }
         }
 

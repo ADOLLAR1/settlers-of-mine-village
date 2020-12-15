@@ -58,6 +58,11 @@ class SocketHandeler {
             } else if (command.type === "PLAYERDATA") {
                 playerdata.updateAll(command.value);
                 gui.update();
+            } else if (command.type === "PILLAGER") {
+                data.return[command.name] = undefined;
+                pillager.pos = command.value;
+            } else if (command.type === "PLACEPILLAGER") {
+                data.return[command.name] = placeHandeler.promptPlace("PILLAGER");
             }
         });
         data.key = playerdata.key;
