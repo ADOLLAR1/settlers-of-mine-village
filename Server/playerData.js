@@ -18,10 +18,11 @@ class PlayerData {
             "purchasedRoad": 2,
             "purchasedVillage": 0,
             "purchasedCity": 0,
-            "cards": [],
             "color": _color,
             "victoryPoints": 0,
-            "key": _key
+            "key": _key,
+            "pillageCards": 0,
+            "lootCards": 0
         };
     }
 }

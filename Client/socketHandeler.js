@@ -117,6 +117,16 @@ class SocketHandeler {
         }));
     }
 
+    playPillager() {
+        this.socket.send(JSON.stringify({
+            "type": "PLAYPILLAGERCARD",
+            "key": playerdata.key,
+            "return": {
+
+            }
+        }));
+    }
+
     attemptPlace(_type) {
         this.socket.send(JSON.stringify({
             "type": "PLACE",

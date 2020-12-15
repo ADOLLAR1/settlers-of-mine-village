@@ -16,7 +16,6 @@ class PlayerData {
         this.purchasedVillage = 0; //int
         this.purchasedCity = 0; //int
         this.victoryPoints = 0; //int
-        this.cards = []; //[int, int, ...]
     }
 
     add(key, value) {
@@ -50,6 +49,5 @@ class PlayerData {
         this.purchasedVillage = _in.purchasedVillage;
         this.purchasedCity = _in.purchasedCity;
         this.victoryPoints = _in.victoryPoints;
-        this.cards = [];
     }    
 }

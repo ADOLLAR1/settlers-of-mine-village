@@ -535,6 +535,62 @@ class Game {
                     _player.playerData.city--;
                     _player.playerData.purchasedCity++;
                 }
+            } else if (_type === "CARD") {
+                if (_player.playerData.ore >= 1 && _player.playerData.cow >= 1 && _player.playerData.glass >= 1) {
+                    _player.playerData.ore--;
+                    _player.playerData.cow--;
+                    _player.playerData.glass--;
+                    let random = Math.random();
+                    if (random >= 0.66) {
+                        _player.playerData.pillageCard++;
+                        _player.socket.send(JSON.stringify({
+                            "type": "PURCHASE",
+                            "return": false,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "PILLAGECARD",
+                                    "message": "You recived a Pillager Card"
+                                }
+                            ]
+                        }));
+                    } else if (random >= 0.33) {
+                        let tmp = ["cow", "wood", "ore", "fish", "clay", "glass"];
+
+                        tmp.forEach(r => {
+                            _player.playerData[r] += Math.floor(Math.random()*2)+1;
+                        });
+                        _player.socket.send(JSON.stringify({
+                            "type": "PURCHASE",
+                            "return": false,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "LOOTCARD",
+                                    "message": "You recived a Loot Card"
+                                },
+                                {
+                                    "type": "PLAYERDATA",
+                                    "name": "PLAYERDATA",
+                                    "value": _player.playerData
+                                }
+                            ]
+                        }));
+                    } else {
+                        _player.playerData.victoryPoints++;
+                        _player.socket.send(JSON.stringify({
+                            "type": "PURCHASE",
+                            "return": false,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "LOOTCARD",
+                                    "message": "You recived a Victroy Point Card"
+                                }
+                            ]
+                        }));
+                    }
+                }
             }
     
             _player.socket.send(JSON.stringify({
@@ -548,6 +604,22 @@ class Game {
                     }
                 ]
             }));
+        }
+
+        data.playPillagerCard = function(_player) {
+            if (_player == this.players[this.turnIndex] && _player.playerData.pillageCards >= 1) {
+                _player.playerData.pillageCards--;
+                _player.socket.send(JSON.stringify({
+                    "type": "PLACEPILLAGER",
+                    "return": true,
+                    "run": [
+                        {
+                            "type": "PLACEPILLAGER",
+                            "name": "data"
+                        }
+                    ]
+                }));
+            }
         }
 
         return data;
