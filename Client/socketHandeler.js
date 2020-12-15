@@ -112,9 +112,27 @@ class SocketHandeler {
         }));
     }
 
+    attemptPlace(_type) {
+        this.socket.send(JSON.stringify({
+            "type": "PLACE",
+            "key": playerdata.key,
+            "return": {
+                "place": placeHandeler.promptPlace(_type)
+            }
+        }));
+    }
+
     startGame() {
         this.socket.send(JSON.stringify({
             "type": "START",
+            "key": this.playerData.key,
+            "return": {}
+        }));
+    }
+
+    endTurn() {
+        this.socket.send(JSON.stringify({
+            "type": "ENDTURN",
             "key": this.playerData.key,
             "return": {}
         }));

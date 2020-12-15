@@ -78,15 +78,15 @@ class GUI {
     }
 
     roadPlaceClick() {
-
+        socketHandeler.attemptPlace("ROAD");
     }
 
     villagePlaceClick() {
-
+        socketHandeler.attemptPlace("VILLAGE");
     }
 
     cityPlaceClick() {
-
+        socketHandeler.attemptPlace("CITY");
     }
 
     cardPurchaseClick() {
@@ -94,6 +94,6 @@ class GUI {
     }
 
     endTurnClick() {
-
+        socketHandeler.endTurn();
     }
 }
