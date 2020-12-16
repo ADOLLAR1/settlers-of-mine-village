@@ -20,9 +20,11 @@ class Tile {
     draw() {
         let tmppos = this.realPos();
         stroke(0,0,0,0);
-        image(ASSETS.IMAGES[this.type], tmppos.x, tmppos.y, this.size, this.size);
+        image(ASSETS.IMAGES[this.type], tmppos.x, tmppos.y, this.size, this.size, 0, 0, 1000, 1000);
         textAlign(RIGHT, TOP);
-        textSize(12);
+        textSize(14);
+        stroke(255,255,255);
+        strokeWeight(3);
         text("("+this.pos.x+","+this.pos.y+")", tmppos.x, tmppos.y, this.size, this.size);
         textAlign(CENTER, CENTER);
         textSize(32);

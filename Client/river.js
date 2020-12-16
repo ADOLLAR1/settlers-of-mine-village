@@ -6,7 +6,7 @@ class River {
     draw() {
         stroke(0,0,0,0);
         let tmppos = this.road.realPos();
-        fill(63,63,255);
+        fill(70,110,120);
         if (this.road.direction == null) {
             rect(tmppos.x, tmppos.y, this.road.size, this.road.size);
             return
