@@ -368,6 +368,27 @@ class Game {
         }
 
         data.rollDice = function() {
+
+            for (let i=0; i<this.players.length; i++) {
+                if (this.players[i].playerData.victoryPoints >= 10) {
+                    this.turnIndex = -1;
+                    for (j=0; j<this.players.length; j++) {
+                        this.players[j].socket.send(JSON.stringify({
+                            "type": "WINALERT",
+                            "return": false,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "WINALERT",
+                                    "message": this.players[i].playerData.name + " has won the game!"
+                                }
+                            ]
+                        }));
+                    }
+                    break;
+                }
+            }
+
             this.turnIndex++;
             if (this.turnIndex == this.players.length) this.turnIndex = 0;
             this.players[this.turnIndex].socket.send(JSON.stringify({
