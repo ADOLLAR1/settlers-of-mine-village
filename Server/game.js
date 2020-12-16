@@ -787,7 +787,7 @@ class Game {
                             {
                                 "type": "PLAYERDATA",
                                 "name": "PLAYERDATA",
-                                "value": this.players[i].playerData
+                                "value": _player.playerData
                             }
                         ]
                     }));
@@ -811,7 +811,7 @@ class Game {
                             {
                                 "type": "PLAYERDATA",
                                 "name": "PLAYERDATA",
-                                "value": this.players[i].playerData
+                                "value": _player.playerData
                             }
                         ]
                     }));

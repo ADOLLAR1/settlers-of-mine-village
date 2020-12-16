@@ -43,6 +43,7 @@ class PlayerData {
         this.fish = _in.fish;
         this.clay = _in.clay;
         this.glass = _in.glass;
+        this.gold = _in.gold;
         this.road = _in.road;
         this.village = _in.village;
         this.city = _in.city;

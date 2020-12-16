@@ -195,7 +195,7 @@ class SocketHandeler {
             temp = prompt("What resource do you want? (cow/wood/ore/fish/clay/glass)");
         }
         let temp2 = "";
-        while (temp2 == undefined || temp === "") {
+        while (temp2 == undefined || temp2 === "") {
             temp2 = prompt("What resource will you spend? (cow/wood/ore/fish/clay/glass)");
         }
         this.socket.send(JSON.stringify({
