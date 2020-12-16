@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <title>Settlers of Mine Village</title>
+  <script src="https://kit.fontawesome.com/f872c3f2f5.js" crossorigin="anonymous"></script>
+  <script src="p5/p5.js"></script>
+  <!--<script src="p5/addons/p5.sound.js"></script>-->
+  <script src="localSketch.js"></script>
+  <script src="playerdata.js"></script>
+  <script src="tile.js"></script>
+  <script src="road.js"></script>
+  <script src="river.js"></script>
+  <script src="roadSlot.js"></script>
+  <script src="village.js"></script>
+  <script src="city.js"></script>
+  <script src="gui.js"></script>
+  <script src="pillager.js"></script>
+  <script src="socketHandeler.js"></script>
+  <script src="placeHandeler.js"></script>
+  <style>
+    td, th {
+      text-align:center;
+      width:32px;
+      height:32px;
+      padding:0;
+      font-size:28px;
+      margin:0;
+      border:1px solid black;
+      border-collapse:collapse;
+      line-height:32px;
+    }
+    td button {
+      margin:auto;
+      width:28px;
+      height:28px;
+      padding:0;
+      font-size:16px;
+    }
+    td p {
+      padding:0;
+      margin:0;
+    }
+    td, th i {
+      width:30px;
+      height:30px;
+      font-size:16px;
+      line-height:32px;
+    }
+    main {
+      grid-area: main;
+      width: 100%;
+      height: 100%;
+    }
+    div.GUI {
+      grid-area: GUI;
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      display: grid;
+      grid-template-areas: 'main GUI';
+    }
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    li {
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+  </main>
+  <div class="GUI">
+    <ul>
+      <li>KEY:&nbsp;<span id="keyLabel"></span></li>
+      <li>&nbsp;</li>
+      <li>VP:&nbsp;<span id="vpLabel"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-horse" tooltip="Cow">:&nbsp;</i><span id="cowLabel"></span></li>
+      <li><i class="fas fa-tree" tooltip="Wood">:&nbsp;</i><span id="woodLabel"></span></li>
+      <li><i class="far fa-gem" tooltip="Ore">:&nbsp;</i><span id="oreLabel"></span></li>
+      <li><i class="fas fa-fish" tooltip="Fish">:&nbsp;</i><span id="fishLabel"></span></li>
+      <li><i class="fas fa-circle" tooltip="Clay">:&nbsp;</i><span id="clayLabel"></span></li>
+      <li><i class="fab fa-windows" tooltip="Glass">:&nbsp;</i><span id="glassLabel"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-road" tooltip="Road">:&nbsp;</i><span id="roadLabel"></span><span id="roadPurchase"></span><span id="roadPlace"></span></li>
+      <li><i class="fas fa-building" tooltip="Village">:&nbsp;</i><span id="villageLabel"></span><span id="villagePurchase"></span><span id="villagePlace"></span></li>
+      <li><i class="fas fa-city" tooltip="City">:&nbsp;</i><span id="cityLabel"></span><span id="cityPurchase"></span><span id="cityPlace"></span></li>
+      <li>&nbsp;</li>
+      <li><i class="fas fa-sd-card" tooltip="Development Card">:&nbsp;</i><span id="cardPurchase"></span><span id="card1Play"></span></li>
+      <li>&nbsp;</li>
+      <li>Road Price: 1x&nbsp;Clay 1x&nbsp;Wood</li>
+      <li>Village Price: 1x&nbsp;Cow 1x&nbsp;Wood 1x&nbsp;Fish 1x&nbsp;Glass</li>
+      <li>City Price: 2x&nbsp;Ore 2x&nbsp;Clay</li>
+      <li>Development Card Price: 1x&nbsp;Ore 1x&nbsp;Cow 1x&nbsp;Glass</li>
+      <li>&nbsp;</li>
+      <li><span id="startTrade"></span></li>
+      <li>&nbsp;</li>
+      <li><span id="end"></span></li>
+    </ul>
+  </div>
+</body>
+</html>

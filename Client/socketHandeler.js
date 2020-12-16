@@ -63,7 +63,7 @@ class SocketHandeler {
                 pillager.pos = command.value;
             } else if (command.type === "PLACEPILLAGER") {
                 data.return[command.name] = placeHandeler.promptPlace("PILLAGER");
-            } else if (command.type === "TRADEREQUEST") {
+            } else if (command.type === "TRADEACCEPT") {
                 data.return[command.name] = {}
                 data.return[command.name].sender = command.sender;
                 let temp = "";
