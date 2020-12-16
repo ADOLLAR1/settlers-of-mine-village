@@ -113,7 +113,7 @@ class Map {
         for (let i=0;i<15;i++) {
             for (let j=0;j<15;j++) {
                 if (data.template[this.posKey(j,i)] === "O") {
-                    data.map[this.posKey(j,i)] = data.tile.create("Ocean", j, i, data.numbers.pop(), "Fish");
+                    data.map[this.posKey(j,i)] = data.tile.create("Ocean", j, i, data.numbers.pop(), "fish");
                 }
                 
                 if (data.template[this.posKey(j,i)] === "R") {
@@ -127,7 +127,11 @@ class Map {
                 
                 if (data.template[this.posKey(j,i)] === "U") {
                     data.map[this.posKey(j,i)] = undefined;
-                } 
+                }
+
+                if (data.template[this.posKey(j,i)] === "G") {
+                    data.map[this.posKey(j,i)] = data.tile.create("Badlands", j, i, data.numbers.pop(), "gold");
+                }
             }
         }
 

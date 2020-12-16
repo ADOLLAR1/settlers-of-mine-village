@@ -12,6 +12,7 @@ class PlayerData {
             "fish": 0,
             "clay": 0,
             "glass": 0,
+            "gold": 0,
             "road": 23,
             "village": 5,
             "city": 5,

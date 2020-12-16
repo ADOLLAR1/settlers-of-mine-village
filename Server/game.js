@@ -771,6 +771,54 @@ class Game {
             }
         }
         
+        data.useGold = function(_player, _type) {
+            if (_player != this.players[this.turnIndex]) {
+                //QOL
+                return;
+            }
+            if (_player.playerData.gold >= 1) {
+                if (_type == "cow" || _type == "wood" || _type == "ore" || _type == "fish" || _type == "clay" || _type == "glass") {
+                    _player.playerData.gold--;
+                    _player.playerData[_type]++;
+                    _player.socket.send(JSON.stringify({
+                        "type": "PLAYERDATA",
+                        "return": false,
+                        "run": [
+                            {
+                                "type": "PLAYERDATA",
+                                "name": "PLAYERDATA",
+                                "value": this.players[i].playerData
+                            }
+                        ]
+                    }));
+                }
+            }
+        }
+
+        data.bankTrade = function(_player, _type, _type2) {
+            if (_player != this.players[this.turnIndex]) {
+                //QOL
+                return;
+            }
+            if ((_type == "cow" || _type == "wood" || _type == "ore" || _type == "fish" || _type == "clay" || _type == "glass") && (_type2 == "cow" || _type2 == "wood" || _type2 == "ore" || _type2 == "fish" || _type2 == "clay" || _type2 == "glass")) {
+                if (_player.playerData[_type2] >= 4) {
+                    _player.playerData[_type2] -= 4;
+                    _player.playerData[_type]++;
+                    _player.socket.send(JSON.stringify({
+                        "type": "PLAYERDATA",
+                        "return": false,
+                        "run": [
+                            {
+                                "type": "PLAYERDATA",
+                                "name": "PLAYERDATA",
+                                "value": this.players[i].playerData
+                            }
+                        ]
+                    }));
+                }
+            }
+        }
+
         return data;
     }
 }

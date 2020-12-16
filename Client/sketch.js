@@ -76,5 +76,6 @@ function loadImages() {
     ASSETS.IMAGES.Mountain = loadImage("Assets/mountain.png");
     ASSETS.IMAGES.Swamp = loadImage("Assets/swamp.png");
     ASSETS.IMAGES.Desert = loadImage("Assets/desert.png");
+    ASSETS.IMAGES.Badlands = loadImage("Assets/badlands.png");
     ASSETS.IMAGES.Pillager = loadImage("Assets/pillager.png");
 }

@@ -115,6 +115,20 @@ class SocketHandeler {
         return (_x + "-" + _y);
     }
 
+    useGold() {
+        let temp = "";
+        while (temp == undefined || temp === "") {
+            temp = prompt("What resource do you want? (cow/wood/ore/fish/clay/glass)");
+        }
+        this.socket.send(JSON.stringify({
+            "type": "USEGOLD",
+            "key": playerdata.key,
+            "return": {
+                "purchase": temp
+            }
+        }));
+    }
+
     purchase(_type) {
         this.socket.send(JSON.stringify({
             "type": "PURCHASE",
@@ -171,6 +185,25 @@ class SocketHandeler {
             "key": playerdata.key,
             "return": {
                 "data": data
+            }
+        }));
+    }
+
+    bankTrade() {
+        let temp = "";
+        while (temp == undefined || temp === "") {
+            temp = prompt("What resource do you want? (cow/wood/ore/fish/clay/glass)");
+        }
+        let temp2 = "";
+        while (temp2 == undefined || temp === "") {
+            temp2 = prompt("What resource will you spend? (cow/wood/ore/fish/clay/glass)");
+        }
+        this.socket.send(JSON.stringify({
+            "type": "BANKTRADE",
+            "key": playerdata.key,
+            "return": {
+                "purchase": temp,
+                "spend": temp2
             }
         }));
     }

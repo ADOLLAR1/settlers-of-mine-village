@@ -9,6 +9,7 @@ class PlayerData {
         this.fish = 0; //int
         this.clay = 0; //int
         this.glass = 0; //int
+        this.gold = 0; //int
         this.road = 25; //int
         this.village = 5; //int
         this.city = 5; //int

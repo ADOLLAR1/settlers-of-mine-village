@@ -9,6 +9,8 @@ class GUI {
         this.fishLabel = createElement("span", this.playerdata.fish.toString());
         this.clayLabel = createElement("span", this.playerdata.clay.toString());
         this.glassLabel = createElement("span", this.playerdata.glass.toString());
+        this.goldLabel = createElement("span", this.playerdata.gold.toString());
+        this.goldUse = createElement("button", "Use Gold");
         this.roadLabel = createElement("span", this.playerdata.purchasedRoad.toString());
         this.villageLabel = createElement("span", this.playerdata.purchasedVillage.toString());
         this.cityLabel = createElement("span", this.playerdata.purchasedCity.toString());
@@ -21,6 +23,7 @@ class GUI {
         this.cardPurchaseButton = createElement("button", "Purchase");
         this.card1PlayButton = createElement("button", "Play Pillage Card");
         this.startTradeButton = createElement("button", "Start Trade");
+        this.bankTradeButton = createElement("button", "Bank Trade");
         this.endTurnButton = createElement("button", "End Turn");
 
         this.keyLabel.parent("keyLabel");
@@ -31,6 +34,8 @@ class GUI {
         this.fishLabel.parent("fishLabel");
         this.clayLabel.parent("clayLabel");
         this.glassLabel.parent("glassLabel");
+        this.goldLabel.parent("goldLabel");
+        this.goldUse.parent("goldUse");
         this.roadLabel.parent("roadLabel");
         this.villageLabel.parent("villageLabel");
         this.cityLabel.parent("cityLabel");
@@ -43,8 +48,10 @@ class GUI {
         this.cardPurchaseButton.parent("cardPurchase");
         this.card1PlayButton.parent("card1Play");
         this.startTradeButton.parent("startTrade");
+        this.bankTradeButton.parent("bankTrade");
         this.endTurnButton.parent("end");
 
+        this.goldUse.mouseClicked(() => {this.goldUseClick()});
         this.roadPurchaseButton.mouseClicked(() => {this.roadPurchaseClick()});
         this.villagePurchaseButton.mouseClicked(() => {this.villagePurchaseClick()});
         this.cityPurchaseButton.mouseClicked(() => {this.cityPurchaseClick()});
@@ -54,6 +61,7 @@ class GUI {
         this.cardPurchaseButton.mouseClicked(() => {this.cardPurchaseClick()});
         this.card1PlayButton.mouseClicked(() => {this.card1PlayClick()});
         this.startTradeButton.mouseClicked(() => {this.startTradeClick()});
+        this.bankTradeButton.mouseClicked(() => {this.bankTradeClick()});
         this.endTurnButton.mouseClicked(() => {this.endTurnClick()});
     }
 
@@ -66,9 +74,16 @@ class GUI {
         this.fishLabel.html(this.playerdata.fish.toString());
         this.clayLabel.html(this.playerdata.clay.toString());
         this.glassLabel.html(this.playerdata.glass.toString());
+        this.goldLabel.html(this.playerdata.gold.toString());
         this.roadLabel.html(this.playerdata.purchasedRoad.toString());
         this.villageLabel.html(this.playerdata.purchasedVillage.toString());
         this.cityLabel.html(this.playerdata.purchasedCity.toString());
+    }
+
+    goldUseClick() {
+        if (this.playerdata.gold >= 1) {
+            socketHandeler.useGold();
+        }
     }
 
     roadPurchaseClick() {
@@ -104,8 +119,11 @@ class GUI {
     }
 
     startTradeClick() {
-        console.log("HI");
         socketHandeler.startTrade();
+    }
+
+    bankTradeClick() {
+        socketHandeler.bankTrade();
     }
 
     endTurnClick() {

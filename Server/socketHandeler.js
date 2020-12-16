@@ -115,6 +115,18 @@ class SocketHandeler {
                 gme.acceptTrade(plr, sender);
             }
         }
+
+        if (object.type === "USEGOLD") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.useGold(plr, object.return.purchase);
+        }
+
+        if (object.type === "BANKTRADE") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.bankTrade(plr, object.return.purchase, object.return.spend);
+        }
     }
 
     getGameFromKey(_key) {

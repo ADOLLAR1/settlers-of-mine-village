@@ -23,10 +23,10 @@ class PlaceHandeler {
             }
         } else {
             while ((parseInt(x) % 2 != 0 && parseInt(y) % 2 != 0) || x == undefined) {
-                while (x === "" || x == undefined || parseInt(x) == Number.NaN || x == 0 || parseInt(x) > 14 || parseInt(x) < 0) {
+                while (x === "" || x == undefined || parseInt(x) == Number.NaN || x == 0 || parseInt(x) > 14 || parseInt(x) <= 0) {
                     x = prompt("Please enter a x coordinate for the pillager!");
                 }
-                while (y === "" || y == undefined || parseInt(y) == Number.NaN || y == 0 || parseInt(y) > 14 || parseInt(y) < 0) {
+                while (y === "" || y == undefined || parseInt(y) == Number.NaN || y == 0 || parseInt(y) > 14 || parseInt(y) <= 0) {
                     y = prompt("Please enter a y coordinate for the pillager!");
                 }
             }
