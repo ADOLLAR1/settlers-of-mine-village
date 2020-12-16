@@ -95,10 +95,25 @@ class SocketHandeler {
             gme.placePillager(plr, object.return.data);
         }
 
-        if (object.tye === "PLAYPILLAGERCARD") {
+        if (object.type === "PLAYPILLAGERCARD") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
             gme.playPillagerCard(plr);
+        }
+
+        if (object.type === "STARTTRADE") {
+            let plr = this.getPlayerFromKey(object.key);
+            let gme = this.getGameFromKey(plr.gameCode);
+            gme.startTrade(plr, object.return.data);
+        }
+
+        if (object.type === "TRADEREQUEST") {
+            if (object.return.tradeaccept.data.toUpperCase() === "Y") {
+                let plr = this.getPlayerFromKey(object.key);
+                let sender = this.getPlayerFromKey(object.return.tradeaccept.sender);
+                let gme = this.getGameFromKey(plr.gameCode);
+                gme.acceptTrade(plr, sender);
+            }
         }
     }
 

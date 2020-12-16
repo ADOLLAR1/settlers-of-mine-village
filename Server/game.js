@@ -622,6 +622,134 @@ class Game {
             }
         }
 
+        data.startTrade = function(_player, _data) {
+            let plrdata;
+            plrdata = _player.playerData;
+            if (plrdata.cow < _data.givecow || plrdata.wood < _data.givewood || plrdata.ore < _data.giveore || plrdata.fish < _data.givefish || plrdata.clay < _data.giveclay || plrdata.glass < _data.giveglass || plrdata.tradeActive) {
+                //QOL
+                return;
+            }
+            plrdata.tradeActive = true; 
+            plrdata.tradeData = _data;
+
+            let cow = _data.takecow;
+            let wood = _data.takewood;
+            let ore = _data.takeore;
+            let fish = _data.takefish;
+            let clay = _data.takeclay;
+            let glass = _data.takeclay;
+
+            let tmpPlayers = [];
+
+            
+
+            for (let i=0; i<this.players.length; i++) {
+                if (this.players[i] != _player) {
+                    plrdata = this.players[i].playerData;
+                    if (plrdata.cow >= cow && plrdata.wood >= wood && plrdata.ore >= ore && plrdata.fish >= fish && plrdata.clay >= clay && plrdata.glass >= glass) {
+                        tmpPlayers.push(this.players[i])
+                    }
+                }
+            }
+
+            _player.socket.send(JSON.stringify({
+                "type": "TRADESTARTMESSAGE",
+                "return": false,
+                "run": [
+                    {
+                        "type": "MESSAGE",
+                        "name": "TRADESTARTMESSAGE",
+                        "message": "Trade request sent to " + tmpPlayers.length + " player(s)!"
+                    }
+                ]
+            }));
+
+            for (let i=0; i<tmpPlayers.length; i++) {
+                tmpPlayers[i].socket.send(JSON.stringify({
+                    "type": "TRADEREQUEST",
+                    "return": true,
+                    "run": [
+                        {
+                            "type": "MESSAGE",
+                            "name": "TRADEREQUESTHEADER",
+                            "message": _player.playerData.name + " has sent a trade request!" 
+                        },
+                        {
+                            "type": "MESSAGE",
+                            "name": "TRADEREQUESTINFO",
+                            "message": "You give: " + cow + " cow " + wood + " wood " + ore + " ore " + fish + " fish " + clay + " clay " + glass + " glass\nYou recive: " + _data.givecow + " cow " + _data.givewood + " wood " + _data.giveore + " ore " + _data.givefish + " fish " + _data.giveclay + " clay " + _data.giveglass + " glass"
+                        },
+                        {
+                            "type": "TRADEACCEPT",
+                            "name": "tradeaccept",
+                            "sender": _player.key
+                        }
+                    ]
+                }));
+            }
+        }
+
+        data.acceptTrade = function(_player, _sender) {
+            if (_sender.playerData.tradeActive) {
+                _sender.playerData.tradeActive = false;
+
+                let data = _sender.playerData.tradeData;
+                let send = _sender.playerData;
+                let plr = _player.playerData;
+
+                send.cow -= data.givecow;
+                send.wood -= data.givewood;
+                send.ore -= data.giveore;
+                send.fish -= data.givefish;
+                send.clay -= data.giveclay;
+                send.glass -= data.giveglass;
+                plr.cow -= data.takecow;
+                plr.wood -= data.takewood;
+                plr.ore -= data.takeore;
+                plr.fish -= data.takefish;
+                plr.clay -= data.takeclay;
+                plr.glass -= data.takeglass;
+
+                send.cow += data.takecow;
+                send.wood += data.takewood;
+                send.ore += data.takeore;
+                send.fish += data.takefish;
+                send.clay += data.takeclay;
+                send.glass += data.takeglass;
+                plr.cow += data.givecow;
+                plr.wood += data.givewood;
+                plr.ore += data.giveore;
+                plr.fish += data.givefish;
+                plr.clay += data.giveclay;
+                plr.glass += data.giveglass;
+
+                this.updatePlayerdata();
+
+                _sender.socket.send(JSON.stringify({
+                    "type": "ACCEPTTRADEMESSAGE",
+                    "return": false,
+                    "run": [
+                        {
+                            "type": "MESSAGE",
+                            "name": "ACCEPTTRADEMESSAGE",
+                            "message": "Trade accepted!"
+                        }
+                    ]
+                }));
+                _player.socket.send(JSON.stringify({
+                    "type": "ACCEPTTRADEMESSAGE",
+                    "return": false,
+                    "run": [
+                        {
+                            "type": "MESSAGE",
+                            "name": "ACCEPTTRADEMESSAGE",
+                            "message": "Trade accepted!"
+                        }
+                    ]
+                }));
+            }
+        }
+        
         return data;
     }
 }

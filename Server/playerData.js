@@ -22,7 +22,9 @@ class PlayerData {
             "victoryPoints": 0,
             "key": _key,
             "pillageCards": 0,
-            "lootCards": 0
+            "lootCards": 0,
+            "tradeActive": false,
+            "tadeData": {}
         };
     }
 }

@@ -20,6 +20,7 @@ class GUI {
         this.cityPlaceButton = createElement("button", "Place");
         this.cardPurchaseButton = createElement("button", "Purchase");
         this.card1PlayButton = createElement("button", "Play Pillage Card");
+        this.startTradeButton = createElement("button", "Start Trade");
         this.endTurnButton = createElement("button", "End Turn");
 
         this.keyLabel.parent("keyLabel");
@@ -41,6 +42,7 @@ class GUI {
         this.cityPlaceButton.parent("cityPlace");
         this.cardPurchaseButton.parent("cardPurchase");
         this.card1PlayButton.parent("card1Play");
+        this.startTradeButton.parent("startTrade");
         this.endTurnButton.parent("end");
 
         this.roadPurchaseButton.mouseClicked(() => {this.roadPurchaseClick()});
@@ -51,6 +53,7 @@ class GUI {
         this.cityPlaceButton.mouseClicked(() => {this.cityPlaceClick()});
         this.cardPurchaseButton.mouseClicked(() => {this.cardPurchaseClick()});
         this.card1PlayButton.mouseClicked(() => {this.card1PlayClick()});
+        this.startTradeButton.mouseClicked(() => {this.startTradeClick()});
         this.endTurnButton.mouseClicked(() => {this.endTurnClick()});
     }
 
@@ -98,6 +101,11 @@ class GUI {
 
     card1PlayClick() {
         socketHandeler.playPillager();
+    }
+
+    startTradeClick() {
+        console.log("HI");
+        socketHandeler.startTrade();
     }
 
     endTurnClick() {

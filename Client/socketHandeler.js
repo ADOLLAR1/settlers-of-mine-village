@@ -63,6 +63,14 @@ class SocketHandeler {
                 pillager.pos = command.value;
             } else if (command.type === "PLACEPILLAGER") {
                 data.return[command.name] = placeHandeler.promptPlace("PILLAGER");
+            } else if (command.type === "TRADEREQUEST") {
+                data.return[command.name] = {}
+                data.return[command.name].sender = command.sender;
+                let temp = "";
+                while (temp == undefined || temp === "") {
+                    temp = prompt("Do you accept this trade? (Y/N)");
+                }
+                data.return[command.name].data = temp
             }
         });
         data.key = playerdata.key;
@@ -133,6 +141,36 @@ class SocketHandeler {
             "key": playerdata.key,
             "return": {
                 "place": placeHandeler.promptPlace(_type)
+            }
+        }));
+    }
+
+    startTrade() {
+        let data = {};
+        let res = ["cow", "wood", "ore", "fish", "clay", "glass"];
+
+        res.forEach(r => {
+            let tmp = -1;
+            while (tmp == Number.NaN || tmp < 0) {
+                tmp = prompt("How many " + r + " will you give?");
+                tmp = parseInt(tmp);
+            }
+            data["give" + r] = tmp; 
+        });
+        res.forEach(r => {
+            let tmp = -1;
+            while (tmp == Number.NaN || tmp < 0) {
+                tmp = prompt("How many " + r + " will you take?");
+                tmp = parseInt(tmp);
+            }
+            data["take" + r] = tmp; 
+        });
+
+        this.socket.send(JSON.stringify({
+            "type": "STARTTRADE",
+            "key": playerdata.key,
+            "return": {
+                "data": data
             }
         }));
     }
