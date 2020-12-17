@@ -7,7 +7,7 @@ def keyCode(_x, _y):
 
 sg.theme('SystemDefaultForReal')
 
-buttons = [[sg.Checkbox("", key=keyCode(j,i)) for j in range(15)] for i in range(15)] + [[sg.Button("COMPILE")]]
+buttons = [[sg.Combo(["L", "O", "G"], size=(1,2), key=keyCode(j,i)) for j in range(15)] for i in range(15)] + [[sg.Button("COMPILE")]]
 
 output = [[sg.Output(size=(80,20))]]
 
@@ -25,12 +25,15 @@ while True:
     for i in range(15):
         for j in range(15):
             if i % 2 == 0 and j % 2 == 0:
-                if values[keyCode(j,i)]:
-                    print("\"" + keyCode(j,i) + "\":\"O\",", end="")
+                if values[keyCode(j,i)] == "G":
+                    print("\"" + keyCode(j,i) + "\":\"G\",", end="")
                 else:
-                    print("\"" + keyCode(j,i) + "\":\"L\",", end="")
+                    if values[keyCode(j,i)] == "O":
+                        print("\"" + keyCode(j,i) + "\":\"O\",", end="")
+                    else:
+                        print("\"" + keyCode(j,i) + "\":\"L\",", end="")
             else:
-                if values[keyCode(j,i)]:
+                if values[keyCode(j,i)] == "O":
                     print("\"" + keyCode(j,i) + "\":\"R\",", end="")
                 else:
                     print("\"" + keyCode(j,i) + "\":\"U\",", end="")
