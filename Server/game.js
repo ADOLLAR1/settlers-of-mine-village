@@ -513,7 +513,8 @@ class Game {
                         {
                             "type": "MESSAGE",
                             "name": "DICE",
-                            "message": "A " + _num + " was rolled!"
+                            "message": "A " + _num + " was rolled!",
+                            "num": _num
                         }
                     ]
                 }));

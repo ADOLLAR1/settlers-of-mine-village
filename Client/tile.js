@@ -19,6 +19,7 @@ class Tile {
 
     draw() {
         let tmppos = this.realPos();
+        fill(0,0,0);
         stroke(0,0,0,0);
         image(ASSETS.IMAGES[this.type], tmppos.x, tmppos.y, this.size, this.size, 0, 0, 1000, 1000);
         textAlign(RIGHT, TOP);
@@ -28,7 +29,11 @@ class Tile {
         text("("+this.pos.x+","+this.pos.y+")", tmppos.x, tmppos.y, this.size, this.size);
         textAlign(CENTER, CENTER);
         textSize(32);
+        if (this.number == 6 || this.number == 8) {
+            fill(255,0,0);
+        }
         text(this.number.toString(), tmppos.x, tmppos.y, this.size, this.size);
+        fill(0,0,0);
     }
 
 }

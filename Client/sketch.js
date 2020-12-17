@@ -24,7 +24,7 @@ function setup() {
     if (tmp == undefined) tmp == "";
     playerdata = new PlayerData(tmp, [0,0,0]);
     gui = new GUI(playerdata);
-    socketHandeler = new SocketHandeler("ws://127.0.0.1:15000", playerdata);
+    socketHandeler = new SocketHandeler("ws://172.16.141.151:15000", playerdata);
     socketHandeler.create();
     placeHandeler = new PlaceHandeler();
     pillager = new Pillager(-2, -2);

@@ -1,6 +1,7 @@
 class GUI {
     constructor(_playerdata) {
         this.playerdata = _playerdata; //PlayerData
+        this.rolls = 0; //int
         this.keyLabel = createElement("span", this.playerdata.key.toString());
         this.vpLabel = createElement("span", this.playerdata.victoryPoints.toString());
         this.cowLabel = createElement("span", this.playerdata.cow.toString());
@@ -25,6 +26,17 @@ class GUI {
         this.startTradeButton = createElement("button", "Start Trade");
         this.bankTradeButton = createElement("button", "Bank Trade");
         this.endTurnButton = createElement("button", "End Turn");
+        this.meter2 = createElement("meter", "");
+        this.meter3 = createElement("meter", "");
+        this.meter4 = createElement("meter", "");
+        this.meter5 = createElement("meter", "");
+        this.meter6 = createElement("meter", "");
+        this.meter7 = createElement("meter", "");
+        this.meter8 = createElement("meter", "");
+        this.meter9 = createElement("meter", "");
+        this.meter10 = createElement("meter", "");
+        this.meter11 = createElement("meter", "");
+        this.meter12 = createElement("meter", "");
 
         this.keyLabel.parent("keyLabel");
         this.vpLabel.parent("vpLabel");
@@ -50,6 +62,17 @@ class GUI {
         this.startTradeButton.parent("startTrade");
         this.bankTradeButton.parent("bankTrade");
         this.endTurnButton.parent("end");
+        this.meter2.parent("2");
+        this.meter3.parent("3");
+        this.meter4.parent("4");
+        this.meter5.parent("5");
+        this.meter6.parent("6");
+        this.meter7.parent("7");
+        this.meter8.parent("8");
+        this.meter9.parent("9");
+        this.meter10.parent("10");
+        this.meter11.parent("11");
+        this.meter12.parent("12");
 
         this.goldUse.mouseClicked(() => {this.goldUseClick()});
         this.roadPurchaseButton.mouseClicked(() => {this.roadPurchaseClick()});
@@ -128,5 +151,17 @@ class GUI {
 
     endTurnClick() {
         socketHandeler.endTurn();
+    }
+
+    updateNumbers(_num) {
+        this["meter" + _num].elt.value++;
+        for (let i=2; i<=12; i++) {
+            if (parseInt(this["meter" + i].elt.value) > this.rolls) {
+                this.rolls = parseInt(this["meter" + i].elt.value);
+            }
+        }
+        for (let i=2; i<=12; i++) {
+            this["meter" + i].elt.max = this.rolls;
+        }
     }
 }

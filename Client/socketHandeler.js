@@ -41,6 +41,9 @@ class SocketHandeler {
             } else if (command.type === "MESSAGE") {
                 data.return[command.name] = undefined;
                 alert(command.message);
+                if (command.name === "DICE") {
+                    gui.updateNumbers(command.num);
+                }
             } else if (command.type === "PROMPT") {
                 let temp = "";
                 while (temp == undefined || temp === "") {
