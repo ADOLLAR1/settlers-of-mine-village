@@ -156,6 +156,7 @@ class GUI {
     updateNumbers(_num) {
         this["meter" + _num].elt.value++;
         for (let i=2; i<=12; i++) {
+            this["meter" + i].elt.max = 1000;
             if (parseInt(this["meter" + i].elt.value) > this.rolls) {
                 this.rolls = parseInt(this["meter" + i].elt.value);
             }
