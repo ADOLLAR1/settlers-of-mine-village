@@ -20,9 +20,11 @@ function preload() {
 
 function setup() {
     createCanvas(870,870);
-    playerdata = new PlayerData("", [0,0,0]);
+    let tmp = prompt("If you have a client key paste it here. Leave blank if you do not have one!");
+    if (tmp == undefined) tmp == "";
+    playerdata = new PlayerData(tmp, [0,0,0]);
     gui = new GUI(playerdata);
-    socketHandeler = new SocketHandeler("ws://192.168.1.237:15000", playerdata);
+    socketHandeler = new SocketHandeler("ws://192.168.1.238:15000", playerdata);
     socketHandeler.create();
     placeHandeler = new PlaceHandeler();
     pillager = new Pillager(-2, -2);
@@ -76,5 +78,6 @@ function loadImages() {
     ASSETS.IMAGES.Mountain = loadImage("Assets/mountain.png");
     ASSETS.IMAGES.Swamp = loadImage("Assets/swamp.png");
     ASSETS.IMAGES.Desert = loadImage("Assets/desert.png");
+    ASSETS.IMAGES.Badlands = loadImage("Assets/badlands.png");
     ASSETS.IMAGES.Pillager = loadImage("Assets/pillager.png");
 }

@@ -20,7 +20,9 @@ function preload() {
 
 function setup() {
     createCanvas(870,870);
-    playerdata = new PlayerData("", [0,0,0]);
+    let tmp = prompt("If you have a client key paste it here. Leave blank if you do not have one!");
+    if (tmp == undefined) tmp == "";
+    playerdata = new PlayerData(tmp, [0,0,0]);
     gui = new GUI(playerdata);
     socketHandeler = new SocketHandeler("ws://127.0.0.1:15000", playerdata);
     socketHandeler.create();
