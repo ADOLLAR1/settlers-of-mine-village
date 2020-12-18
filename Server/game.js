@@ -193,7 +193,115 @@ class Game {
                                 ]
                             }));
                         }
+                    } else if (_flag2 == true) {
+                        this.players[this.turnIndex].socket.send(JSON.stringify({
+                            "type": "VILLAGEONE",
+                            "return": true,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "TURN",
+                                    "message": "Please place one village!"
+                                },
+                                {
+                                    "type": "PLACE",
+                                    "name": "Village1",
+                                    "value": "VILLAGE"
+                                },
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "TURN",
+                                    "message": "Please place one Road!"
+                                },
+                                {
+                                    "type": "PLACE",
+                                    "name": "Road1",
+                                    "value": "ROAD"
+                                }
+                            ]
+                        }));
+                    } else if (_flag2 == null) {
+                        this.players[this.turnIndex].socket.send(JSON.stringify({
+                            "type": "VILLAGETWO",
+                            "return": true,
+                            "run": [
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "TURN",
+                                    "message": "Please place one village!"
+                                },
+                                {
+                                    "type": "PLACE",
+                                    "name": "Village1",
+                                    "value": "VILLAGE"
+                                },
+                                {
+                                    "type": "MESSAGE",
+                                    "name": "TURN",
+                                    "message": "Please place one Road!"
+                                },
+                                {
+                                    "type": "PLACE",
+                                    "name": "Road1",
+                                    "value": "ROAD"
+                                }
+                            ]
+                        }));
                     }
+                } else if (_flag2 == true) {
+                    this.players[this.turnIndex].socket.send(JSON.stringify({
+                        "type": "VILLAGEONE",
+                        "return": true,
+                        "run": [
+                            {
+                                "type": "MESSAGE",
+                                "name": "TURN",
+                                "message": "Please place one village!"
+                            },
+                            {
+                                "type": "PLACE",
+                                "name": "Village1",
+                                "value": "VILLAGE"
+                            },
+                            {
+                                "type": "MESSAGE",
+                                "name": "TURN",
+                                "message": "Please place one Road!"
+                            },
+                            {
+                                "type": "PLACE",
+                                "name": "Road1",
+                                "value": "ROAD"
+                            }
+                        ]
+                    }));
+                } else if (_flag == null) {
+                    this.players[this.turnIndex].socket.send(JSON.stringify({
+                        "type": "VILLAGETWO",
+                        "return": true,
+                        "run": [
+                            {
+                                "type": "MESSAGE",
+                                "name": "TURN",
+                                "message": "Please place one village!"
+                            },
+                            {
+                                "type": "PLACE",
+                                "name": "Village1",
+                                "value": "VILLAGE"
+                            },
+                            {
+                                "type": "MESSAGE",
+                                "name": "TURN",
+                                "message": "Please place one Road!"
+                            },
+                            {
+                                "type": "PLACE",
+                                "name": "Road1",
+                                "value": "ROAD"
+                            }
+                        ]
+                    }));
                 }
             }
             if (_object.type === "VILLAGE") {
@@ -372,7 +480,7 @@ class Game {
             for (let i=0; i<this.players.length; i++) {
                 if (this.players[i].playerData.victoryPoints >= 10) {
                     this.turnIndex = -1;
-                    for (j=0; j<this.players.length; j++) {
+                    for (let j=0; j<this.players.length; j++) {
                         this.players[j].socket.send(JSON.stringify({
                             "type": "WINALERT",
                             "return": false,
