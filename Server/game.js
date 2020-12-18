@@ -554,6 +554,11 @@ class Game {
                                 "type": "MESSAGE",
                                 "name": "PILLAGED",
                                 "message": "Pillaged! " + toRemove + " resources were pillaged."
+                            },
+                            {
+                                "type": "PLAYERDATA",
+                                "name": "PLAYERDATA",
+                                "value": plr.playerData
                             }
                         ]
                     }));
@@ -672,7 +677,7 @@ class Game {
                     _player.playerData.glass--;
                     let random = Math.random();
                     if (random >= 0.66) {
-                        _player.playerData.pillageCard++;
+                        _player.playerData.pillageCards++;
                         _player.socket.send(JSON.stringify({
                             "type": "PURCHASE",
                             "return": false,
@@ -816,6 +821,9 @@ class Game {
                         }
                     ]
                 }));
+            }
+            if (tmpPlayers.length <= 0) {
+                _player.playerData.tradeActive = false;
             }
         }
 
