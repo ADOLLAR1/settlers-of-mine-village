@@ -59,15 +59,86 @@ class SocketHandeler {
         if (object.type === "VILLAGEONE") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
-            gme.place(object.return.Village1, plr, true, false);
-            gme.place(object.return.Road1, plr, false, true);
+            if (object.return.Village1.x % 2 == object.return.Village1.y % 2 && object.return.Village1.x % 2 == 1) {
+                if (object.return.Road1.x % 2 != object.return.Road1.y % 2) {
+                    if (gme.map.map[gme.mapClass.posKey(object.return.Village1.x, object.return.Village1.y)] == undefined && gme.map.map[gme.mapClass.posKey(object.return.Road1.x, object.return.Road1.y)] == undefined && this.posCheck(object.return.Village1.x, object.return.Village1.y, object.return.Road1.x, object.return.Road1.y)) {
+                        gme.place(object.return.Village1, plr, true, false);
+                        gme.place(object.return.Road1, plr, false, true);
+                        return;
+                    }
+                }
+            }
+            plr.socket.send(JSON.stringify({
+                "type": "VILLAGEONE",
+                "return": true,
+                "run": [
+                    {
+                        "type": "MESSAGE",
+                        "name": "TURN",
+                        "message": "Please place one village!"
+                    },
+                    {
+                        "type": "PLACE",
+                        "name": "Village1",
+                        "value": "VILLAGE"
+                    },
+                    {
+                        "type": "MESSAGE",
+                        "name": "TURN",
+                        "message": "Please place one Road!"
+                    },
+                    {
+                        "type": "PLACE",
+                        "name": "Road1",
+                        "value": "ROAD"
+                    }
+                ]
+            }));
         }
 
         if (object.type === "VILLAGETWO") {
             let plr = this.getPlayerFromKey(object.key);
             let gme = this.getGameFromKey(plr.gameCode);
-            gme.place(object.return.Village1, plr, true, false);
-            gme.place(object.return.Road1, plr, false, null);
+            if (object.return.Village1.x % 2 == object.return.Village1.y % 2 && object.return.Village1.x % 2 == 1) {
+                if (object.return.Road1.x % 2 != object.return.Road1.y % 2) {
+                    if (gme.map.map[gme.mapClass.posKey(object.return.Village1.x, object.return.Village1.y)] == undefined && gme.map.map[gme.mapClass.posKey(object.return.Road1.x, object.return.Road1.y)] == undefined && this.posCheck(object.return.Village1.x, object.return.Village1.y, object.return.Road1.x, object.return.Road1.y)) {
+                        gme.place(object.return.Village1, plr, true, false);
+                        gme.place(object.return.Road1, plr, false, null);
+                        return;
+                    }
+                }
+            }
+            plr.socket.send(JSON.stringify({
+                "type": "VILLAGETWO",
+                "return": true,
+                "run": [
+                    {
+                        "type": "MESSAGE",
+                        "name": "FAIL",
+                        "message": "POSITION INVALID!!! Please try again!"
+                    },
+                    {
+                        "type": "MESSAGE",
+                        "name": "TURN",
+                        "message": "Please place one village!"
+                    },
+                    {
+                        "type": "PLACE",
+                        "name": "Village1",
+                        "value": "VILLAGE"
+                    },
+                    {
+                        "type": "MESSAGE",
+                        "name": "TURN",
+                        "message": "Please place one Road!"
+                    },
+                    {
+                        "type": "PLACE",
+                        "name": "Road1",
+                        "value": "ROAD"
+                    }
+                ]
+            }));
         }
 
         if (object.type === "PURCHASE") {
@@ -152,6 +223,27 @@ class SocketHandeler {
             }
         }
         return undefined;
+    }
+
+    posCheck(_x1, _y1, _x2, _y2) {
+        let found = false;
+        parsetInt(_x1);
+        parsetInt(_y1);
+        parsetInt(_x2);
+        parsetInt(_y2);
+        if (_x2 == _x1-1 && _y2 == _y1) {
+            found = true;
+        }
+        if (_x2 == _x1+1 && _y2 == _y1) {
+            found = true;
+        }
+        if (_x2 == _x1 && _y2 == _y1-1) {
+            found = true;
+        }
+        if (_x2 == _x1 && _y2 == _y1+1) {
+            found = true;
+        }
+        return found;
     }
 }
 
